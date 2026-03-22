@@ -1,6 +1,27 @@
+import { useEffect } from 'react';
 import './App.css';
 
 function App() {
+
+    useEffect(() => {
+        loadPosts();
+    }, []);
+
+    const loadPosts = async () => {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/blog/posts/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+            console.log('Posts:', data);
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+        }
+    };
+
     return (
         <div className="app">
             {/* Header */}
