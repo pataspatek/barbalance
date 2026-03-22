@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-sdv2dq$o9^zx7&4fpl@%^gie_lxh+aj47u_hsgopvvab44-b0g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS: list[str] = [
     "barbalance-api.onrender.com",
