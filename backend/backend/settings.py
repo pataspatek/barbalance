@@ -68,6 +68,13 @@ CORS_ALLOWED_ORIGINS = [
     "https://barbalance.onrender.com",  # production frontend
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ]
+}
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
