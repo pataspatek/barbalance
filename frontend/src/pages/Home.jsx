@@ -1,0 +1,33 @@
+import { Link } from 'react-router-dom';
+
+function Home() {
+    return (
+        <div>
+            {/* Hero Section */}
+            <section className="hero">
+                <div className="hero-image hero-image-left">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&h=600&fit=crop" alt="Fitness" />
+                </div>
+                <div className="hero-content">
+                    <h1>Fitness bez extrémů. Výživa bez stresu.</h1>
+                    <p>Odborné poradenství v oblasti výživy a personalizované fitness tréninky pro trvalý wellness</p>
+                    <Link to="/contact" className="cta-button">Naplánujte si konzultaci</Link>
+                </div>
+                <div className="hero-image hero-image-right">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=600&fit=crop" alt="Zdravá výživa" />
+                </div>
+            </section>
+
+            {/* Quick Links Section */}
+            <section className="quick-links" style={{ padding: '40px 20px', textAlign: 'center', backgroundColor: '#f5f5f5' }}>
+                <h2>Jaké chcete téma?</h2>
+                <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <Link to="/blog" className="cta-button">Čtěte naše články</Link>
+                    <Link to="/services" className="cta-button">Objevte naše služby</Link>
+                </div>
+            </section>
+        </div>
+    );
+}
+
+export default Home;
