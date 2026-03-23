@@ -1,0 +1,46 @@
+@import 'variables';
+@import 'animations';
+
+// ============ BUTTONS ============
+.cta-button,
+.cta-button-secondary {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all $transition-base;
+    display: inline-block;
+    text-decoration: none;
+    animation: fadeInUp $transition-slow 0.4s backwards;
+}
+
+.cta-button {
+    background: $primary-color;
+    color: white;
+    box-shadow: 0 4px 15px rgba($primary-color, 0.2);
+
+    &:hover {
+        background: $secondary-color;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba($primary-color, 0.3);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.cta-button-secondary {
+    background: $accent-color;
+    color: $primary-color;
+    border: 2px solid $primary-color;
+    font-weight: 600;
+
+    &:hover {
+        background: $primary-color;
+        color: white;
+        transform: translateY(-2px);
+    }
+}

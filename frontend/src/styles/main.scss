@@ -1,0 +1,21 @@
+// ============ MAIN SCSS FILE ============
+// This file imports all SCSS partials in the correct order
+
+// 1. Variables and configuration
+@import 'variables';
+
+// 2. Global styles and resets
+@import 'globals';
+
+// 3. Animations
+@import 'animations';
+
+// 4. Component styles
+@import 'buttons';
+@import 'header';
+@import 'footer';
+@import 'hero';
+@import 'sections';
+
+// 5. Responsive design (must be last)
+@import 'responsive';

@@ -1,5 +1,7 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './styles/main.scss';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -13,25 +15,7 @@ function App() {
     return (
         <Router>
             <div className="app">
-                {/* Header */}
-                <header className="header">
-                    <div className="header-container">
-                        <div className="logo-section">
-                            <Link to="/" className="logo-link">
-                                <h1 className="logo">BarBalance</h1>
-                                <p className="tagline">Výživa • Fitness • Wellness</p>
-                            </Link>
-                        </div>
-                        <nav className="nav">
-                            <Link to="/">Domů</Link>
-                            <Link to="/about">O nás</Link>
-                            <Link to="/services">Služby</Link>
-                            <Link to="/blog">Blog</Link>
-                            <Link to="/approach">Náš přístup</Link>
-                            <Link to="/contact">Kontakt</Link>
-                        </nav>
-                    </div>
-                </header>
+                <Header />
 
                 {/* Main Content */}
                 <Routes>
@@ -44,13 +28,7 @@ function App() {
                     <Route path="/blog/:id" element={<Article />} />
                 </Routes>
 
-                {/* Footer */}
-                <footer className="footer">
-                    <div className="footer-content">
-                        <p>&copy; 2026 BarBalance. Všechna práva vyhrazena.</p>
-                        <p>Posílení zdravých voleb, jedním člověkem najednou.</p>
-                    </div>
-                </footer>
+                <Footer />
             </div>
         </Router>
     );

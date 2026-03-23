@@ -1,0 +1,40 @@
+// ============ COLOR PALETTE ============
+:root {
+    --primary-color: #316238;
+    --secondary-color: #2d5a32;
+    --accent-color: #e5dac8;
+    --background-light: #ffffff;
+    --background-warm: #f9f7f4;
+    --text-dark: #2c2c2c;
+    --text-muted: #666666;
+}
+
+// ============ SCSS VARIABLES ============
+$primary-color: #316238;
+$secondary-color: #2d5a32;
+$accent-color: #e5dac8;
+$background-light: #ffffff;
+$background-warm: #f9f7f4;
+$text-dark: #2c2c2c;
+$text-muted: #666666;
+
+// Spacing
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-xxl: 2.5rem;
+
+// Sizing
+$max-width: 1200px;
+$border-radius: 12px;
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-base: 0.3s ease;
+$transition-slow: 0.8s ease;
+
+// Media Queries
+$breakpoint-lg: 1024px;
+$breakpoint-md: 768px;
+$breakpoint-sm: 480px;
