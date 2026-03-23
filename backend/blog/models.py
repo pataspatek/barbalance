@@ -8,14 +8,14 @@ def recipe_image_path(instance, filename):
     return f'recipes/{instance.slug}{ext}'
 
 class Recipe(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True)
-    description = models.TextField(max_length=500)
-    image = models.ImageField(upload_to=recipe_image_path)
-    ingredients = models.TextField()
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    title: models.CharField = models.CharField(max_length=200)
+    slug: models.SlugField = models.SlugField(unique=True, blank=True)
+    description: models.TextField = models.TextField(max_length=500)
+    image: models.ImageField = models.ImageField(upload_to=recipe_image_path)
+    ingredients: models.TextField = models.TextField()
+    content: models.TextField = models.TextField()
+    created_at: models.DateTimeField = models.DateTimeField(auto_now_add=True)
+    updated_at: models.DateTimeField = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-created_at']
