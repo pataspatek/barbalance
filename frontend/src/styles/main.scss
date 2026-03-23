@@ -17,5 +17,8 @@
 @import 'hero';
 @import 'sections';
 
-// 5. Responsive design (must be last)
+// 5. Page-specific styles
+@import 'pages';
+
+// 6. Responsive design (must be last)
 @import 'responsive';

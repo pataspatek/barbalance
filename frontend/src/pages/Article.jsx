@@ -34,36 +34,36 @@ function Article() {
     };
 
     if (loading) {
-        return <section style={{ padding: '40px 20px', textAlign: 'center' }}>Načítání článku...</section>;
+        return <section className="article-loading">Načítání článku...</section>;
     }
 
     if (error) {
         return (
-            <section style={{ padding: '40px 20px', textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-                <p style={{ color: 'red', marginBottom: '20px' }}>Chyba: {error}</p>
+            <section className="article-error">
+                <p>Chyba: {error}</p>
                 <Link to="/blog" className="cta-button">Zpět na blog</Link>
             </section>
         );
     }
 
     if (!article) {
-        return <section style={{ padding: '40px 20px', textAlign: 'center' }}>Článek nenalezen</section>;
+        return <section className="article-loading">Článek nenalezen</section>;
     }
 
     return (
-        <section style={{ padding: '40px 20px', maxWidth: '800px', margin: '0 auto' }}>
-            <Link to="/blog" style={{ color: '#007bff', textDecoration: 'none', marginBottom: '20px', display: 'inline-block' }}>
+        <section className="article-container">
+            <Link to="/blog" className="article-back-link">
                 ← Zpět na blog
             </Link>
             
             <article>
-                <h1 style={{ marginBottom: '10px' }}>{article.title}</h1>
-                <small style={{ color: '#999' }}>
+                <h1>{article.title}</h1>
+                <small>
                     {new Date(article.created_at).toLocaleDateString('cs-CZ')}
                     {article.author && ` • Autor: ${article.author}`}
                 </small>
                 
-                <div style={{ marginTop: '30px', lineHeight: '1.8', color: '#333' }}>
+                <div className="article-content">
                     {article.content}
                 </div>
             </article>

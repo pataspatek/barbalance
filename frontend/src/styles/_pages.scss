@@ -1,0 +1,133 @@
+@import 'variables';
+
+// ============ BLOG PAGE ============
+.blog {
+    padding: $spacing-xxl;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    h1 {
+        font-size: 2.5rem;
+        color: $primary-color;
+        margin-bottom: 1rem;
+    }
+
+    > p {
+        font-size: 1rem;
+        color: $text-muted;
+        margin-bottom: 1.875rem;
+    }
+}
+
+.blog-empty {
+    text-align: center;
+    color: #999;
+}
+
+.blog-grid {
+    display: grid;
+    gap: $spacing-xl;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.blog-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.blog-card {
+    border: 1px solid #ddd;
+    border-radius: $border-radius;
+    padding: $spacing-xl;
+    cursor: pointer;
+    transition: transform $transition-fast, box-shadow $transition-fast;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+        margin-bottom: 0.625rem;
+        color: $primary-color;
+    }
+
+    p {
+        color: $text-muted;
+        margin-bottom: 0.9375rem;
+        flex-grow: 1;
+        font-size: 0.95rem;
+    }
+
+    small {
+        color: #999;
+        font-size: 0.85rem;
+    }
+}
+
+// ============ ARTICLE PAGE ============
+.article-container {
+    padding: $spacing-xxl;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.article-back-link {
+    color: #007bff;
+    text-decoration: none;
+    margin-bottom: 1.25rem;
+    display: inline-block;
+    transition: color $transition-base;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+article {
+    h1 {
+        margin-bottom: 0.625rem;
+        color: $primary-color;
+        font-size: 2rem;
+    }
+
+    > small {
+        color: #999;
+        font-size: 0.9rem;
+    }
+}
+
+.article-content {
+    margin-top: 1.875rem;
+    line-height: 1.8;
+    color: #333;
+    font-size: 1rem;
+
+    p {
+        margin-bottom: 1rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.article-error {
+    padding: $spacing-xxl;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+
+    p {
+        color: red;
+        margin-bottom: 1.25rem;
+    }
+}
+
+.article-loading {
+    padding: $spacing-xxl;
+    text-align: center;
+}

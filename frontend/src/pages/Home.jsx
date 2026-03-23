@@ -17,15 +17,6 @@ function Home() {
                     <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=600&fit=crop" alt="Zdravá výživa" />
                 </div>
             </section>
-
-            {/* Quick Links Section */}
-            <section className="quick-links" style={{ padding: '40px 20px', textAlign: 'center', backgroundColor: '#f5f5f5' }}>
-                <h2>Jaké chcete téma?</h2>
-                <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                    <Link to="/blog" className="cta-button">Čtěte naše články</Link>
-                    <Link to="/services" className="cta-button">Objevte naše služby</Link>
-                </div>
-            </section>
         </div>
     );
 }
