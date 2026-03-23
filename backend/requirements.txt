@@ -1,6 +1,8 @@
 Django==5.2.1
 djangorestframework==3.15.2
-psycopg2-binary==2.9.9
+
+psycopg==3.1.18
+
 dj-database-url==2.1.0
 python-dotenv==1.0.1
 django-cors-headers==4.3.1
