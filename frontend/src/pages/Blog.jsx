@@ -13,7 +13,7 @@ function Blog() {
     const fetchArticles = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/blog/posts/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/blog/posts/`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,8 +51,8 @@ function Blog() {
                 <div className="blog-grid">
                     {articles.map((article) => (
                         <Link 
-                            to={`/blog/${article.id}`} 
-                            key={article.id}
+                            to={`/blog/${article.slug}`} 
+                            key={article.slug}
                             className="blog-card-link"
                         >
                             <div className="blog-card">

@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 function Article() {
-    const { id } = useParams();
+    const { slug } = useParams();
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         fetchArticle();
-    }, [id]);
+    }, [slug]);
 
     const fetchArticle = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/blog/posts/${id}/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/blog/posts/${slug}/`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -25,6 +25,7 @@ function Article() {
             }
             const data = await response.json();
             setArticle(data);
+            console.log(data)
         } catch (err) {
             console.error('Error fetching article:', err);
             setError(err.message);
@@ -56,16 +57,56 @@ function Article() {
                 ← Zpět na blog
             </Link>
             
-            <article>
-                <h1>{article.title}</h1>
-                <small>
-                    {new Date(article.created_at).toLocaleDateString('cs-CZ')}
-                    {article.author && ` • Autor: ${article.author}`}
-                </small>
+            <article className="recipe-article">
+                {article.image && (
+                    <div className="recipe-image-container">
+                        <img 
+                            src={`${import.meta.env.VITE_API_URL}${article.image}`}
+                            alt={article.title}
+                            className="recipe-image"
+                        />
+                    </div>
+                )}
                 
-                <div className="article-content">
-                    {article.content}
+                <div className="recipe-header">
+                    <h1>{article.title}</h1>
+                    <div className="recipe-meta">
+                        <small>{new Date(article.created_at).toLocaleDateString('cs-CZ')}</small>
+                        {article.author && <small>Autor: {article.author}</small>}
+                    </div>
                 </div>
+
+                {article.description && (
+                    <div className="recipe-description">
+                        <p>{article.description}</p>
+                    </div>
+                )}
+
+                {article.ingredients && (
+                    <div className="recipe-section">
+                        <h2>Ingredience</h2>
+                        <ul className="ingredients-list">
+                            {article.ingredients.split('\n').map((ingredient, index) => (
+                                ingredient.trim() && (
+                                    <li key={index}>{ingredient.trim()}</li>
+                                )
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
+                {article.content && (
+                    <div className="recipe-section">
+                        <h2>Postup</h2>
+                        <div className="recipe-instructions">
+                            {article.content.split('\n').map((step, index) => (
+                                step.trim() && (
+                                    <p key={index}>{step.trim()}</p>
+                                )
+                            ))}
+                        </div>
+                    </div>
+                )}
             </article>
         </section>
     );

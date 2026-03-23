@@ -131,3 +131,136 @@ article {
     padding: $spacing-xxl;
     text-align: center;
 }
+
+// ============ RECIPE ARTICLE ============
+.recipe-article {
+    h2 {
+        font-size: 1.8rem;
+        color: $primary-color;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid $primary-color;
+        padding-bottom: 0.5rem;
+    }
+}
+
+.recipe-image-container {
+    width: 100%;
+    max-height: 400px;
+    margin-bottom: 2rem;
+    border-radius: $border-radius;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba($primary-color, 0.1);
+}
+
+.recipe-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.recipe-header {
+    margin-bottom: 1.5rem;
+
+    h1 {
+        font-size: 2.5rem;
+        color: $primary-color;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
+}
+
+.recipe-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    small {
+        color: $text-muted;
+        font-size: 0.95rem;
+    }
+}
+
+.recipe-description {
+    background: $background-warm;
+    padding: $spacing-lg;
+    border-left: 4px solid $primary-color;
+    border-radius: $border-radius;
+    margin-bottom: 2rem;
+
+    p {
+        color: $text-dark;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        margin: 0;
+    }
+}
+
+.recipe-section {
+    margin-bottom: 2.5rem;
+}
+
+.ingredients-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+
+    li {
+        padding: 0.75rem 1rem;
+        background: $background-warm;
+        border-left: 3px solid $accent-color;
+        border-radius: 4px;
+        font-size: 0.95rem;
+        color: $text-dark;
+        transition: background $transition-base;
+
+        &:hover {
+            background: rgba($primary-color, 0.05);
+            border-left-color: $primary-color;
+        }
+
+        &::before {
+            content: '✓ ';
+            color: $primary-color;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+.recipe-instructions {
+    p {
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+        color: $text-dark;
+        font-size: 0.95rem;
+        padding-left: 1.5rem;
+        position: relative;
+
+        &::before {
+            content: counter(step);
+            counter-increment: step;
+            position: absolute;
+            left: 0;
+            background: $primary-color;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    counter-reset: step;
+}

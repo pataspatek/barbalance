@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-sdv2dq$o9^zx7&4fpl@%^gie_lxh+aj47u_hsgopvvab44-b0g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS: list[str] = [
     "barbalance-api.onrender.com",
@@ -65,8 +65,11 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # your local frontend
+    "http://127.0.0.1:5173",  # local frontend with 127.0.0.1
     "https://barbalance.onrender.com",  # production frontend
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True  # Development only - be more restrictive in production
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -135,6 +138,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Media files (User uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
