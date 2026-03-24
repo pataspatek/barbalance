@@ -84,27 +84,19 @@ function Article() {
 
                 {article.ingredients && (
                     <div className="recipe-section">
-                        <h2>Ingredience</h2>
-                        <ul className="ingredients-list">
-                            {article.ingredients.split('\n').map((ingredient, index) => (
-                                ingredient.trim() && (
-                                    <li key={index}>{ingredient.trim()}</li>
-                                )
-                            ))}
-                        </ul>
+                        <div 
+                            className="recipe-ingredients"
+                            dangerouslySetInnerHTML={{ __html: article.ingredients }}
+                        />
                     </div>
                 )}
 
                 {article.content && (
                     <div className="recipe-section">
-                        <h2>Postup</h2>
-                        <div className="recipe-instructions">
-                            {article.content.split('\n').map((step, index) => (
-                                step.trim() && (
-                                    <p key={index}>{step.trim()}</p>
-                                )
-                            ))}
-                        </div>
+                        <div 
+                            className="recipe-instructions"
+                            dangerouslySetInnerHTML={{ __html: article.content }}
+                        />
                     </div>
                 )}
             </article>

@@ -58,7 +58,7 @@ function Blog() {
                             <div className="blog-card">
                                 <h3>{article.title}</h3>
                                 <p>
-                                    {article.content?.substring(0, 100)}...
+                                    {article.description}
                                 </p>
                                 <small>
                                     {new Date(article.created_at).toLocaleDateString('cs-CZ')}
