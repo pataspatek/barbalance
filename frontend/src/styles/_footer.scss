@@ -1,0 +1,27 @@
+@use 'variables' as *;
+
+// ============ FOOTER ============
+.footer {
+    background: $text-dark;
+    color: white;
+    padding: 3rem $spacing-xl;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: $max-width;
+    margin: 0 auto;
+    text-align: center;
+
+    p {
+        font-size: 0.95rem;
+        opacity: 0.85;
+        margin-bottom: 0.5rem;
+
+        &:last-child {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    }
+}

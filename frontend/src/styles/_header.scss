@@ -1,0 +1,81 @@
+@use 'variables' as *;
+
+// ============ HEADER ============
+.header {
+    background: $background-light;
+    border-bottom: 1px solid rgba($primary-color, 0.1);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.header-container {
+    max-width: $max-width;
+    margin: 0 auto;
+    padding: 0 $spacing-xl;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $spacing-xl;
+}
+
+.logo-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.logo-link {
+    text-decoration: none;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $primary-color;
+    letter-spacing: -0.5px;
+}
+
+.tagline {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: $text-muted;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+// ============ NAVIGATION ============
+.nav {
+    display: flex;
+    gap: $spacing-xxl;
+
+    a {
+        color: $text-dark;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: color $transition-base;
+        position: relative;
+
+        &:hover {
+            color: $primary-color;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: $primary-color;
+            transition: width $transition-base;
+        }
+
+        &:hover::after {
+            width: 100%;
+        }
+    }
+}

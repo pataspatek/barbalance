@@ -1,0 +1,266 @@
+@use 'variables' as *;
+
+// ============ BLOG PAGE ============
+.blog {
+    padding: $spacing-xxl;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    h1 {
+        font-size: 2.5rem;
+        color: $primary-color;
+        margin-bottom: 1rem;
+    }
+
+    > p {
+        font-size: 1rem;
+        color: $text-muted;
+        margin-bottom: 1.875rem;
+    }
+}
+
+.blog-empty {
+    text-align: center;
+    color: #999;
+}
+
+.blog-grid {
+    display: grid;
+    gap: $spacing-xl;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.blog-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.blog-card {
+    border: 1px solid #ddd;
+    border-radius: $border-radius;
+    padding: $spacing-xl;
+    cursor: pointer;
+    transition: transform $transition-fast, box-shadow $transition-fast;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+        margin-bottom: 0.625rem;
+        color: $primary-color;
+    }
+
+    p {
+        color: $text-muted;
+        margin-bottom: 0.9375rem;
+        flex-grow: 1;
+        font-size: 0.95rem;
+    }
+
+    small {
+        color: #999;
+        font-size: 0.85rem;
+    }
+}
+
+// ============ ARTICLE PAGE ============
+.article-container {
+    padding: $spacing-xxl;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.article-back-link {
+    color: #007bff;
+    text-decoration: none;
+    margin-bottom: 1.25rem;
+    display: inline-block;
+    transition: color $transition-base;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+article {
+    h1 {
+        margin-bottom: 0.625rem;
+        color: $primary-color;
+        font-size: 2rem;
+    }
+
+    > small {
+        color: #999;
+        font-size: 0.9rem;
+    }
+}
+
+.article-content {
+    margin-top: 1.875rem;
+    line-height: 1.8;
+    color: #333;
+    font-size: 1rem;
+
+    p {
+        margin-bottom: 1rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.article-error {
+    padding: $spacing-xxl;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+
+    p {
+        color: red;
+        margin-bottom: 1.25rem;
+    }
+}
+
+.article-loading {
+    padding: $spacing-xxl;
+    text-align: center;
+}
+
+// ============ RECIPE ARTICLE ============
+.recipe-article {
+    h2 {
+        font-size: 1.8rem;
+        color: $primary-color;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid $primary-color;
+        padding-bottom: 0.5rem;
+    }
+}
+
+.recipe-image-container {
+    width: 100%;
+    max-height: 400px;
+    margin-bottom: 2rem;
+    border-radius: $border-radius;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba($primary-color, 0.1);
+}
+
+.recipe-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.recipe-header {
+    margin-bottom: 1.5rem;
+
+    h1 {
+        font-size: 2.5rem;
+        color: $primary-color;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
+}
+
+.recipe-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    small {
+        color: $text-muted;
+        font-size: 0.95rem;
+    }
+}
+
+.recipe-description {
+    background: $background-warm;
+    padding: $spacing-lg;
+    border-left: 4px solid $primary-color;
+    border-radius: $border-radius;
+    margin-bottom: 2rem;
+
+    p {
+        color: $text-dark;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        margin: 0;
+    }
+}
+
+.recipe-section {
+    margin-bottom: 2.5rem;
+}
+
+.ingredients-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+
+    li {
+        padding: 0.75rem 1rem;
+        background: $background-warm;
+        border-left: 3px solid $accent-color;
+        border-radius: 4px;
+        font-size: 0.95rem;
+        color: $text-dark;
+        transition: background $transition-base;
+
+        &:hover {
+            background: rgba($primary-color, 0.05);
+            border-left-color: $primary-color;
+        }
+
+        &::before {
+            content: '✓ ';
+            color: $primary-color;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+.recipe-instructions {
+    p {
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+        color: $text-dark;
+        font-size: 0.95rem;
+        padding-left: 2.5rem;
+        position: relative;
+
+        &::before {
+            content: counter(step);
+            counter-increment: step;
+            position: absolute;
+            left: 0;
+            background: $primary-color;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    counter-reset: step;
+}
