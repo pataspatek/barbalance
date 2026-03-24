@@ -2,23 +2,23 @@
 // This file imports all SCSS partials in the correct order
 
 // 1. Variables and configuration
-@import 'variables';
+@use 'variables' as *;
 
 // 2. Global styles and resets
-@import 'globals';
+@use 'globals' as *;
 
 // 3. Animations
-@import 'animations';
+@use 'animations' as *;
 
 // 4. Component styles
-@import 'buttons';
-@import 'header';
-@import 'footer';
-@import 'hero';
-@import 'sections';
+@use 'buttons' as *;
+@use 'header' as *;
+@use 'footer' as *;
+@use 'hero' as *;
+@use 'sections' as *;
 
 // 5. Page-specific styles
-@import 'pages';
+@use 'pages' as *;
 
 // 6. Responsive design (must be last)
-@import 'responsive';
+@use 'responsive' as *;
