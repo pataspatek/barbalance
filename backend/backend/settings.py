@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-sdv2dq$o9^zx7&4fpl@%^gie_lxh+aj47u_hsgopvvab44-b0g'
+SECRET_KEY = os.getenv('SECRET_KEY', 'dev-key-change-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -71,7 +71,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://barbalance.onrender.com",  # production frontend
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True  # Development only - be more restrictive in production
+# Only allow all origins in development
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -103,7 +105,10 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL')) # type: ignore
+DATABASES['default'] = dj_database_url.parse(
+    os.getenv('DATABASE_URL'), # type: ignore
+    conn_max_age=600,
+    ssl_require=True) 
                                             
                                             # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
