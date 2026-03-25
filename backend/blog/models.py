@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
 import os
-from ckeditor.fields import RichTextField  # type: ignore
 
 def recipe_image_path(instance, filename):
     """Generate file path for recipe images using the recipe slug"""
@@ -13,8 +12,8 @@ class Recipe(models.Model):
     slug: models.SlugField = models.SlugField(unique=True, blank=True)
     description: models.TextField = models.TextField(max_length=500)
     image: models.ImageField = models.ImageField(upload_to=recipe_image_path)
-    ingredients: RichTextField = RichTextField()
-    content: RichTextField = RichTextField()
+    ingredients: models.TextField = models.TextField()
+    content: models.TextField = models.TextField()
     created_at: models.DateTimeField = models.DateTimeField(auto_now_add=True)
     updated_at: models.DateTimeField = models.DateTimeField(auto_now=True)
 
