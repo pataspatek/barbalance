@@ -10,8 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
-import dj_database_url # type: ignore
-
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -47,8 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cloudinary_storage',
-    'cloudinary',
     'rest_framework',
     'corsheaders',
     'ckeditor',
@@ -106,7 +102,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-                                 
+
                                             # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
