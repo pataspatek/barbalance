@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'dev-key-change-in-production')
 DEBUG = True
 
 ALLOWED_HOSTS: list[str] = [
-    "barbalance-api.onrender.com",
+    "https://barbalance-production.up.railway.app/",
     "localhost",
     "127.0.0.1",
 ]
