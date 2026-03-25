@@ -27,14 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'dev-key-change-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS: list[str] = [
-    "https://barbalance-production.up.railway.app/",
+    "barbalance-production.up.railway.app",
     "localhost",
     "127.0.0.1",
 ]
-
 
 # Application definition
 
