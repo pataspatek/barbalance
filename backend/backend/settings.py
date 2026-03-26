@@ -66,14 +66,14 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # your local frontend
     "http://127.0.0.1:5173",  # local frontend with 127.0.0.1
-    "https://barbalance.onrender.com",  # production frontend
+    "https://barbalance.vercel.app/",  # production frontend
     "https://*.railway.app",  # Railway frontend subdomain
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://barbalance.onrender.com",
+    "https://barbalance.vercel.app/",
     "https://barbalance-production.up.railway.app",
 ]
 
