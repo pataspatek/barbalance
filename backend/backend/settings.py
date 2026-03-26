@@ -168,7 +168,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Railway Storage Configuration (S3-compatible)
-if os.environ.get('RAILWAY_STORAGE_BUCKET'):
+if os.environ.get('AWS_ENDPOINT_URL'):
     # Production: Use Railway Storage
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
@@ -182,7 +182,7 @@ if os.environ.get('RAILWAY_STORAGE_BUCKET'):
     AWS_S3_FILE_OVERWRITE = False
     
     # Use S3 storage for media files
-    MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/media/'
+    MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/'
     MEDIA_ROOT = 'media/'
 else:
     # Development: Use local filesystem
