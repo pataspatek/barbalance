@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'storages',
     'blog',
 ]
 
@@ -165,25 +166,26 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Media files
-if os.environ.get('AWS_ENDPOINT_URL'):
-    # S3 / Railway Storage settings
+# S3 / Railway Storage settings
+if os.environ.get("AWS_ENDPOINT_URL"):
+    # Production: Use Railway Storage (S3-compatible)
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-
+    
     AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-    AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
-    AWS_S3_ENDPOINT_URL = os.environ.get("AWS_ENDPOINT_URL") or ""
-    AWS_S3_REGION_NAME = os.environ.get("AWS_DEFAULT_REGION")  # Must match your env variable
-
-    AWS_QUERYSTRING_AUTH = False      # Public URLs, no signed query
-    AWS_S3_FILE_OVERWRITE = False     # Don’t overwrite files with same name
-    AWS_DEFAULT_ACL = "public-read"   # Make files publicly readable
-
-    # Media URL
-    MEDIA_URL = f"{AWS_S3_ENDPOINT_URL.rstrip('/')}/{AWS_STORAGE_BUCKET_NAME}/media/"
-
+    AWS_S3_BUCKET_NAME = os.environ.get("AWS_S3_BUCKET_NAME")
+    AWS_ENDPOINT_URL = os.environ.get("AWS_ENDPOINT_URL", "").rstrip('/')
+    AWS_DEFAULT_REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+    
+    # S3 configuration for public access
+    AWS_QUERYSTRING_AUTH = False  # Public URLs, no signed query strings
+    AWS_S3_FILE_OVERWRITE = False  # Don't overwrite files with same name
+    AWS_DEFAULT_ACL = 'public-read'  # Make uploaded files publicly readable
+    
+    # Media URL for S3
+    MEDIA_URL = f"{AWS_ENDPOINT_URL}/{AWS_S3_BUCKET_NAME}/media/"
+    MEDIA_ROOT = 'media/'
 else:
-    # Development: local filesystem
+    # Development: Use local filesystem
     MEDIA_URL = '/media/'
-    MEDIA_ROOT = BASE_DIR / 'media'
+    MEDIA_ROOT = str(BASE_DIR / 'media')
