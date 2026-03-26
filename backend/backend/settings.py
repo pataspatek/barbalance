@@ -175,14 +175,14 @@ if os.environ.get('AWS_ENDPOINT_URL'):
     AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
     RAILWAY_BUCKET_NAME = os.environ.get("RAILWAY_BUCKET_NAME")
-    AWS_S3_ENDPOINT_URL = os.environ.get("AWS_ENDPOINT_URL")
+    AWS_S3_ENDPOINT_URL = os.environ.get("AWS_ENDPOINT_URL") or ""
     AWS_S3_REGION_NAME = os.environ.get("AWS_REGION")
 
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_FILE_OVERWRITE = False
     
     # Use S3 storage for media files
-    MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{RAILWAY_BUCKET_NAME}/'
+    MEDIA_URL = f"{AWS_S3_ENDPOINT_URL.rstrip('/')}/{RAILWAY_BUCKET_NAME}/"
     MEDIA_ROOT = 'media/'
 else:
     # Development: Use local filesystem
