@@ -180,6 +180,7 @@ if os.environ.get("AWS_ENDPOINT_URL"):
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_FILE_OVERWRITE = False
     AWS_DEFAULT_ACL = 'public-read'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
     # Proper MEDIA_URL for Railway Storage
-    MEDIA_URL = f"{AWS_ENDPOINT_URL}/{AWS_S3_BUCKET_NAME}/"
+    MEDIA_URL = f"{AWS_ENDPOINT_URL}/{AWS_S3_BUCKET_NAME}/media/"
