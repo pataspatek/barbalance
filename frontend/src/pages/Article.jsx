@@ -61,7 +61,7 @@ function Article() {
                 {article.image && (
                     <div className="recipe-image-container">
                         <img 
-                            src={`${import.meta.env.VITE_API_URL}${article.image}`}
+                            src={article.image}
                             alt={article.title}
                             className="recipe-image"
                         />
