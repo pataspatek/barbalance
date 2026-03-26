@@ -183,7 +183,3 @@ if os.environ.get("AWS_ENDPOINT_URL"):
 
     # Proper MEDIA_URL for Railway Storage
     MEDIA_URL = f"{AWS_ENDPOINT_URL}/{AWS_S3_BUCKET_NAME}/"
-else:
-    # Development: Use local filesystem
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = str(BASE_DIR / 'media')
