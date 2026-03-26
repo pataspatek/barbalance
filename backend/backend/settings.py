@@ -178,6 +178,7 @@ if os.environ.get('AWS_ENDPOINT_URL'):
 
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = 'public-read'
     
     # Use S3 storage for media files
     MEDIA_URL = f"{AWS_S3_ENDPOINT_URL.rstrip('/')}/{AWS_STORAGE_BUCKET_NAME}/"
