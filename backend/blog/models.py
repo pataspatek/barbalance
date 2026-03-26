@@ -3,9 +3,9 @@ from django.utils.text import slugify
 import os
 
 def recipe_image_path(instance, filename):
-    """Generate file path for recipe images using the recipe slug"""
-    ext = os.path.splitext(filename)[1]  # Get file extension
-    return f'recipes/{instance.slug}{ext}'
+    """Generate S3-friendly file path for recipe images using the recipe slug"""
+    ext = os.path.splitext(filename)[1]  # keep the original file extension
+    return f'media/recipes/{instance.slug}{ext}'  # prefix with 'media/' for S3
 
 class Recipe(models.Model):
     title: models.CharField = models.CharField(max_length=200)
