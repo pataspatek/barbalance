@@ -19,6 +19,7 @@
 
 // 5. Page-specific styles
 @use 'pages' as *;
+@use 'gallery' as *;
 
 // 6. Responsive design (must be last)
 @use 'responsive' as *;

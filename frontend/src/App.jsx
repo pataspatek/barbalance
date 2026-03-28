@@ -9,6 +9,7 @@ import Approach from './pages/Approach';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import Article from './pages/Article';
+import Gallery from './pages/Gallery';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/services" element={<Services />} />
                     <Route path="/approach" element={<Approach />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/gallery" element={<Gallery />} />
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/blog/:slug" element={<Article />} />
                 </Routes>
