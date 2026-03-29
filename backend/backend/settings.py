@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'rest_framework',
     'corsheaders',
     'storages',
@@ -166,21 +168,20 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# S3 / Railway Storage settings
-if os.environ.get("AWS_ENDPOINT_URL"):
-    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+# Cloudinary storage settings
+if os.environ.get("CLOUDINARY_URL"):
+    DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+    
+    # Optional: Configure Cloudinary-specific settings
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': os.environ.get("CLOUDINARY_CLOUD_NAME", ""),
+        'API_KEY': os.environ.get("CLOUDINARY_API_KEY", ""),
+        'API_SECRET': os.environ.get("CLOUDINARY_API_SECRET", ""),
+    }
+    
+    MEDIA_URL = '/media/'
 
-    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-    AWS_S3_BUCKET_NAME = os.environ.get("AWS_S3_BUCKET_NAME")
-    AWS_ENDPOINT_URL = os.environ.get("AWS_ENDPOINT_URL", "").rstrip('/')
-    AWS_DEFAULT_REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
-
-    # Make files publicly accessible
-    AWS_QUERYSTRING_AUTH = False
-    AWS_S3_FILE_OVERWRITE = False
-    AWS_DEFAULT_ACL = 'public-read'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-
-    # Proper MEDIA_URL for Railway Storage
-    MEDIA_URL = f"{AWS_ENDPOINT_URL}/{AWS_S3_BUCKET_NAME}/media/"
+# Local media storage (development)
+else:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
