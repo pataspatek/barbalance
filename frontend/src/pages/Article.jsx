@@ -58,10 +58,10 @@ function Article() {
             </Link>
             
             <article className="recipe-article">
-                {article.image && (
+                {article.image_url && (
                     <div className="recipe-image-container">
                         <img 
-                            src={article.image}
+                            src={article.image_url}
                             alt={article.title}
                             className="recipe-image"
                         />
