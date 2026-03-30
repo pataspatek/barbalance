@@ -1,14 +1,15 @@
 from django.db import models
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField  # type: ignore
+from django_ckeditor_5.fields import CKEditor5Field # type: ignore
 
 class Recipe(models.Model):
     title: models.CharField = models.CharField(max_length=200)
     slug: models.SlugField = models.SlugField(unique=True, blank=True)
-    description: models.TextField = models.TextField(max_length=500)
+    description: CKEditor5Field = CKEditor5Field('description', config_name='default')
     image: CloudinaryField = CloudinaryField('image', blank=True, null=True, folder='recipes/')
-    ingredients: models.TextField = models.TextField()
-    content: models.TextField = models.TextField()
+    ingredients: CKEditor5Field = CKEditor5Field('ingredients', config_name='default')
+    content: CKEditor5Field = CKEditor5Field('content', config_name='extends')
     created_at: models.DateTimeField = models.DateTimeField(auto_now_add=True)
     updated_at: models.DateTimeField = models.DateTimeField(auto_now=True)
 
