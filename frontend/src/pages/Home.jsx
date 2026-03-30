@@ -6,7 +6,7 @@ function Home() {
             {/* Hero Section */}
             <section className="hero">
                 <div className="hero-image hero-image-left">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&h=600&fit=crop" alt="Fitness" />
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&h=600&fit=crop" alt="Fitness" />
                 </div>
                 <div className="hero-content">
                     <h1>Fitness bez extrémů. Výživa bez stresu.</h1>
