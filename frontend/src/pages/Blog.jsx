@@ -56,13 +56,20 @@ function Blog() {
                             className="blog-card-link"
                         >
                             <div className="blog-card">
-                                <h3>{article.title}</h3>
-                                <p>
-                                    {article.description}
-                                </p>
-                                <small>
-                                    {new Date(article.created_at).toLocaleDateString('cs-CZ')}
-                                </small>
+                                {article.image && (
+                                    <div className="blog-card-image">
+                                        <img src={article.image_url} alt={article.title} />
+                                    </div>
+                                )}
+                                <div className="blog-card-content">
+                                    <h3>{article.title}</h3>
+                                    <p>
+                                        {article.description}
+                                    </p>
+                                    <small>
+                                        {new Date(article.created_at).toLocaleDateString('cs-CZ')}
+                                    </small>
+                                </div>
                             </div>
                         </Link>
                     ))}
