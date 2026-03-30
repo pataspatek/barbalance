@@ -10,6 +10,17 @@ function Blog() {
         fetchArticles();
     }, []);
 
+    const stripHtml = (html) => {
+        const tmp = document.createElement('DIV');
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || '';
+    };
+
+    const truncateText = (text, length = 150) => {
+        if (text.length <= length) return text;
+        return text.substring(0, length) + '...';
+    };
+
     const fetchArticles = async () => {
         try {
             setLoading(true);
@@ -64,7 +75,7 @@ function Blog() {
                                 <div className="blog-card-content">
                                     <h3>{article.title}</h3>
                                     <p>
-                                        {article.description}
+                                        {truncateText(stripHtml(article.description))}
                                     </p>
                                     <small>
                                         {new Date(article.created_at).toLocaleDateString('cs-CZ')}

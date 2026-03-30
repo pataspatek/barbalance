@@ -78,7 +78,9 @@ function Article() {
 
                 {article.description && (
                     <div className="recipe-description">
-                        <p>{article.description}</p>
+                        <div 
+                            dangerouslySetInnerHTML={{ __html: article.description }}
+                        />
                     </div>
                 )}
 
