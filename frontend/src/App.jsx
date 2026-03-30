@@ -33,6 +33,7 @@ function App() {
 
                 <Footer />
             </div>
+            <Analytics />
         </Router>
     );
 }
