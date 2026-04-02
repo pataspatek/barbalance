@@ -49,10 +49,12 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
     'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
     'storages',
     'django_ckeditor_5',
     'blog',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -108,10 +110,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 # Use PostgreSQL on Railway via DATABASE_URL, SQLite locally
-if os.environ.get("DATABASE_URL"):
+if os.environ.get("DATABASE_PUBLIC_URL"):
     DATABASES = {
         "default": dj_database_url.config(
-            default=os.environ.get("DATABASE_URL"),
+            default=os.environ.get("DATABASE_PUBLIC_URL"),
             conn_max_age=600,
             ssl_require=True
         )
@@ -216,4 +218,27 @@ CKEDITOR_5_CONFIGS = {
             ],
         },
     },
+}
+
+# Custom User Model
+AUTH_USER_MODEL = 'users.User'
+
+# REST Framework Configuration
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+}
+
+# JWT Configuration
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
 }
