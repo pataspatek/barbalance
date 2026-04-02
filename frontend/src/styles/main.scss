@@ -1,5 +1,6 @@
 // ============ MAIN SCSS FILE ============
-// This file imports all SCSS partials in the correct order
+// This file imports global styles shared across the application
+// Component and page-specific styles are now colocated with their components
 
 // 1. Variables and configuration
 @use 'variables' as *;
@@ -10,16 +11,8 @@
 // 3. Animations
 @use 'animations' as *;
 
-// 4. Component styles
+// 4. Shared component styles (buttons, etc.)
 @use 'buttons' as *;
-@use 'header' as *;
-@use 'footer' as *;
-@use 'hero' as *;
-@use 'sections' as *;
 
-// 5. Page-specific styles
-@use 'pages' as *;
-@use 'gallery' as *;
-
-// 6. Responsive design (must be last)
+// 5. Responsive design (must be last)
 @use 'responsive' as *;

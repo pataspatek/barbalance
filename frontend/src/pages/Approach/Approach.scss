@@ -1,0 +1,71 @@
+@use '../../styles/variables' as *;
+
+// ============ APPROACH SECTION ============
+.approach {
+    background: $background-light;
+    padding: 6rem $spacing-xl;
+}
+
+.approach-content {
+    max-width: $max-width;
+    margin: 0 auto;
+
+    h2 {
+        font-size: 2.5rem;
+        color: $primary-color;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+}
+
+.approach-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-xl;
+}
+
+.step {
+    text-align: center;
+    padding: $spacing-xl;
+    border-radius: $border-radius;
+    background: linear-gradient(
+        135deg,
+        $background-warm 0%,
+        rgba($primary-color, 0.03) 100%
+    );
+    border: 1px solid rgba($primary-color, 0.1);
+    transition: all $transition-base;
+
+    &:hover {
+        border-color: $primary-color;
+        box-shadow: 0 8px 20px rgba($primary-color, 0.1);
+        transform: translateY(-3px);
+    }
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: $primary-color;
+    color: white;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.step h3 {
+    font-size: 1.2rem;
+    color: $primary-color;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.step p {
+    color: $text-muted;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}

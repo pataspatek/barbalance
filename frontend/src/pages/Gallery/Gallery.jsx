@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import '../styles/_gallery.scss';
+import './Gallery.scss';
 
 function Gallery() {
     const [media, setMedia] = useState([]);

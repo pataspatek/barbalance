@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import './Blog.scss';
 
 function Blog() {
     const [articles, setArticles] = useState([]);

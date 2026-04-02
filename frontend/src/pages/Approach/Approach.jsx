@@ -1,3 +1,5 @@
+import './Approach.scss';
+
 function Approach() {
     return (
         <section className="approach">

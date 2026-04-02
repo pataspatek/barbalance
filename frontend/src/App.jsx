@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import './styles/main.scss';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import Approach from './pages/Approach';
-import Contact from './pages/Contact';
-import Blog from './pages/Blog';
-import Article from './pages/Article';
-import Gallery from './pages/Gallery';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Home from './pages/Home/Home';
+import About from './pages/About/About';
+import Services from './pages/Services/Services';
+import Approach from './pages/Approach/Approach';
+import Contact from './pages/Contact/Contact';
+import Blog from './pages/Blog/Blog';
+import Article from './pages/Article/Article';
+import Gallery from './pages/Gallery/Gallery';
 
 function App() {
 

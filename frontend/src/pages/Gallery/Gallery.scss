@@ -1,4 +1,4 @@
-@use 'variables' as *;
+@use '../../styles/variables' as *;
 
 .gallery-container {
     max-width: 1200px;
@@ -169,6 +169,7 @@
                 text-overflow: ellipsis;
                 display: -webkit-box;
                 -webkit-line-clamp: 5;
+                line-clamp: 5;
                 -webkit-box-orient: vertical;
                 flex-shrink: 0;
             }
