@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../utils/Constants';
 import './Login.scss';
 
 function Login() {
@@ -45,8 +46,8 @@ function Login() {
         const data = await response.json();
         
         // Store tokens in localStorage
-        localStorage.setItem('access_token', data.access);
-        localStorage.setItem('refresh_token', data.refresh);
+        localStorage.setItem(ACCESS_TOKEN, data.access);
+        localStorage.setItem(REFRESH_TOKEN, data.refresh);
         
         return data;
     };

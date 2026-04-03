@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../utils/Constants';
 
 function Logout() {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ function Logout() {
 
     const logoutUser = async () => {
         try {
-            const refresh_token = localStorage.getItem('refresh_token');
+            const refresh_token = localStorage.getItem(REFRESH_TOKEN);
             
             if (!refresh_token) {
                 throw new Error('No refresh token found');
@@ -30,8 +31,8 @@ function Logout() {
         } catch (error) {
             console.warn("[Logout] Server error, clearing session anyway.", error);
         } finally {
-            localStorage.removeItem('access_token');
-            localStorage.removeItem('refresh_token');
+            localStorage.removeItem(ACCESS_TOKEN);
+            localStorage.removeItem(REFRESH_TOKEN);
             navigate('/login');
         }
     };
