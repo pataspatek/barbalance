@@ -26,3 +26,14 @@ def login_view(request):
         "refresh": str(refresh),
         "access": str(refresh.access_token)
     }, status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+def logout_view(request):
+    try: 
+        refresh_token = request.data["refresh"]
+        token = RefreshToken(refresh_token)
+        token.blacklist()
+        return Response({"detail": "Logout succesful"}, status=status.HTTP_205_RESET_CONTENT)
+    except Exception as e:
+        return Response({"detail": "Invalid or expired token"}, status=status.HTTP_400_BAD_REQUEST)

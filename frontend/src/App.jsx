@@ -12,6 +12,7 @@ import Blog from './pages/Blog/Blog';
 import Article from './pages/Article/Article';
 import Gallery from './pages/Gallery/Gallery';
 import Login from './pages/Login/Login';
+import Logout from './pages/Logout/Logout';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/blog/:slug" element={<Article />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/logout" element={<Logout />} />
                 </Routes>
 
                 <Footer />
