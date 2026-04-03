@@ -6,7 +6,19 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from .serializers import UserSerializer
+
 # Create your views here.
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def current_user(request):
+    user = request.user
+    serializer = UserSerializer(user)
+    return Response({
+        "user": serializer.data
+    }, status=status.HTTP_200_OK)
+
+
 @api_view(["POST"])
 def login_view(request):
     username = request.data.get("username")

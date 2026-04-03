@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../utils/Constants';
+import { AuthContext } from '../../utils/AuthContext';
 import './Login.scss';
 
 function Login() {
@@ -9,6 +9,7 @@ function Login() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,40 +17,13 @@ function Login() {
         setLoading(true);
 
         try {
-            await loginUser(username, password);
-            // Redirect to dashboard or home after successful login
+            await login({ username, password });
             navigate('/');
         } catch (err) {
             setError(err.message || 'Login failed. Please try again.');
         } finally {
             setLoading(false);
         }
-    };
-
-    const loginUser = async (username, password) => {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username,
-                password,
-            }),
-        });
-
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.detail || `HTTP Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        
-        // Store tokens in localStorage
-        localStorage.setItem(ACCESS_TOKEN, data.access);
-        localStorage.setItem(REFRESH_TOKEN, data.refresh);
-        
-        return data;
     };
 
 
