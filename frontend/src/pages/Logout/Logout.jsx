@@ -10,7 +10,7 @@ function Logout() {
         // Call the logout API to blacklist the refresh token
         logout();
         navigate('/login');
-    }, [logout, navigate]);
+    }, []);
 
     return (
         <div className="logout-container">
