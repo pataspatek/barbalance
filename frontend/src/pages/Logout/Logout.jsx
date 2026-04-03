@@ -17,7 +17,7 @@ function Logout() {
                 throw new Error('No refresh token found');
             }
 
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/users/logout/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/logout/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
