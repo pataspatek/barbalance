@@ -59,7 +59,7 @@ def client_update(request, pk):
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def client_delete(request, pk):
-    """Delete client - only superusers can delete"""
+    """Delete client and associated user - only superusers can delete"""
     if not request.user.is_superuser:
         return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
     
@@ -68,7 +68,10 @@ def client_delete(request, pk):
     except Client.DoesNotExist:
         return Response({'error': 'Client not found'}, status=status.HTTP_404_NOT_FOUND)
     
-    client.delete()
+    # Deleting the user will cascade delete the client
+    user = client.user
+    user.delete()
+    
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -90,15 +93,8 @@ def client_create(request):
         if hasattr(user, 'client_profile'):
             return Response({'error': 'This user already has a client profile'}, status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist:
-        # Create new user if doesn't exist
-        username = email.split('@')[0]
-        # Ensure unique username
-        base_username = username
-        counter = 1
-        while User.objects.filter(username=username).exists():
-            username = f"{base_username}{counter}"
-            counter += 1
-        user = User.objects.create_user(username=username, email=email, password='temp123')
+        # Create new user if doesn't exist (username is optional now)
+        user = User.objects.create_user(email=email, password='temp123')
     
     # Create client linked to user
     try:
