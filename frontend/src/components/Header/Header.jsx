@@ -23,16 +23,6 @@ function Header() {
                     <Link to="/approach">Náš přístup</Link>
                     <Link to="/contact">Kontakt</Link>
                 </nav>
-                <div className="user-section">
-                    {user ? (
-                        <>
-                            <span className="user-name">{user.username}</span>
-                            <Link to="/logout" className="logout-link">Logout</Link>
-                        </>
-                    ) : (
-                        <Link to="/login" className="login-link">Login</Link>
-                    )}
-                </div>
             </div>
         </header>
     );
