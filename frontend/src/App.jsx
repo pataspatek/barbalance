@@ -13,6 +13,7 @@ import Article from './pages/Article/Article';
 import Gallery from './pages/Gallery/Gallery';
 import Login from './pages/Login/Login';
 import Logout from './pages/Logout/Logout';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
                     <Route path="/blog/:slug" element={<Article />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Logout />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
 
                 <Footer />
