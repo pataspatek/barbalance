@@ -58,7 +58,7 @@ function AuthProvider({ children }) {
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error(data.detail || "Invalid username or password");
+            throw new Error(data.detail || "Invalid email or password");
         }
 
         // Save tokens in localStorage

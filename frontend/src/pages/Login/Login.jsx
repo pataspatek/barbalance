@@ -4,7 +4,7 @@ import { AuthContext } from '../../utils/AuthContext';
 import './Login.scss';
 
 function Login() {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ function Login() {
         setLoading(true);
 
         try {
-            await login({ username, password });
+            await login({ email, password });
             navigate('/');
         } catch (err) {
             setError(err.message || 'Login failed. Please try again.');
@@ -36,13 +36,13 @@ function Login() {
                 
                 <form onSubmit={handleSubmit} className="login-form">
                     <div className="form-group">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="email">Email</label>
                         <input
-                            type="text"
-                            id="username"
-                            placeholder="Enter your username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             required
                             disabled={loading}
                         />
