@@ -10,9 +10,10 @@ function Dashboard() {
     const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         email: '',
+        first_name: '',
+        last_name: '',
+        age: '',
         phone: '',
-        company: '',
-        address: '',
     });
     const [editingId, setEditingId] = useState(null);
     const [showForm, setShowForm] = useState(false);
@@ -55,10 +56,9 @@ function Dashboard() {
     };
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
-            [name]: value,
+            [e.target.name]: e.target.value,
         }));
     };
 
@@ -84,7 +84,7 @@ function Dashboard() {
 
             if (!response.ok) throw new Error('Failed to save client');
             
-            setFormData({ email: '', phone: '', company: '', address: '' });
+            setFormData({ email: '', first_name: '', last_name: '', age: '', phone: '' });
             setEditingId(null);
             setShowForm(false);
             await fetchClients();
@@ -97,9 +97,10 @@ function Dashboard() {
     const handleEdit = (client) => {
         setFormData({
             email: client.email,
+            first_name: client.first_name || '',
+            last_name: client.last_name || '',
+            age: client.age || '',
             phone: client.phone || '',
-            company: client.company || '',
-            address: client.address || '',
         });
         setEditingId(client.id);
         setShowForm(true);
@@ -130,7 +131,7 @@ function Dashboard() {
     const handleCancel = () => {
         setShowForm(false);
         setEditingId(null);
-        setFormData({ email: '', phone: '', company: '', address: '' });
+        setFormData({ email: '', first_name: '', last_name: '', age: '', phone: '' });
     };
 
     return (
@@ -165,6 +166,41 @@ function Dashboard() {
                             />
                         </div>
                         <div className="form-group">
+                            <label htmlFor="first_name">First Name</label>
+                            <input
+                                type="text"
+                                id="first_name"
+                                name="first_name"
+                                value={formData.first_name}
+                                onChange={handleInputChange}
+                                placeholder="Client first name"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="last_name">Last Name</label>
+                            <input
+                                type="text"
+                                id="last_name"
+                                name="last_name"
+                                value={formData.last_name}
+                                onChange={handleInputChange}
+                                placeholder="Client last name"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="age">Age</label>
+                            <input
+                                type="number"
+                                id="age"
+                                name="age"
+                                value={formData.age}
+                                onChange={handleInputChange}
+                                placeholder="Client age"
+                                min="0"
+                                max="150"
+                            />
+                        </div>
+                        <div className="form-group">
                             <label htmlFor="phone">Phone</label>
                             <input
                                 type="text"
@@ -173,28 +209,6 @@ function Dashboard() {
                                 value={formData.phone}
                                 onChange={handleInputChange}
                                 placeholder="Client phone number"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="company">Company</label>
-                            <input
-                                type="text"
-                                id="company"
-                                name="company"
-                                value={formData.company}
-                                onChange={handleInputChange}
-                                placeholder="Company name"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="address">Address</label>
-                            <input
-                                type="text"
-                                id="address"
-                                name="address"
-                                value={formData.address}
-                                onChange={handleInputChange}
-                                placeholder="Client address"
                             />
                         </div>
                         <div className="form-actions">
@@ -226,9 +240,10 @@ function Dashboard() {
                                 <tr>
                                     <th>Username</th>
                                     <th>Email</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Age</th>
                                     <th>Phone</th>
-                                    <th>Company</th>
-                                    <th>Address</th>
                                     <th>Created</th>
                                     <th>Actions</th>
                                 </tr>
@@ -238,9 +253,10 @@ function Dashboard() {
                                     <tr key={client.id}>
                                         <td>{client.username}</td>
                                         <td>{client.email}</td>
+                                        <td>{client.first_name || '-'}</td>
+                                        <td>{client.last_name || '-'}</td>
+                                        <td>{client.age || '-'}</td>
                                         <td>{client.phone || '-'}</td>
-                                        <td>{client.company || '-'}</td>
-                                        <td>{client.address || '-'}</td>
                                         <td>{new Date(client.created_at).toLocaleDateString()}</td>
                                         <td className="actions">
                                             <button 

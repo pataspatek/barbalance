@@ -104,9 +104,10 @@ def client_create(request):
     try:
         client = Client.objects.create(
             user=user,
-            phone=request.data.get('phone', ''),
-            company=request.data.get('company', ''),
-            address=request.data.get('address', '')
+            first_name=request.data.get('first_name', ''),
+            last_name=request.data.get('last_name', ''),
+            age=request.data.get('age'),
+            phone=request.data.get('phone', '')
         )
         serializer = ClientSerializer(client)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
