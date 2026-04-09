@@ -8,9 +8,13 @@ function LoadingWrapper({ children }) {
     if (loading) {
         return (
             <div className="loading-wrapper">
-                <div className="loader">
-                    <div className="spinner"></div>
-                    <p>Loading...</p>
+                <div className="loader-shell">
+                    <div className="loader">
+                        <div className="spinner"></div>
+                        <p className="loader-kicker">Bar Balance</p>
+                        <h2>Loading your session</h2>
+                        <p className="loader-text">Preparing the page and checking authentication.</p>
+                    </div>
                 </div>
             </div>
         );

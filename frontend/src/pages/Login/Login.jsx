@@ -31,6 +31,7 @@ function Login() {
         <div className="login-container">
             <div className="login-card">
                 <h1>Login</h1>
+                <p>Access your Bar Balance account and continue where you left off.</p>
                 
                 {error && <div className="error-message">{error}</div>}
                 

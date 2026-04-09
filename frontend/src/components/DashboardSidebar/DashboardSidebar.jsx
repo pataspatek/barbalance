@@ -15,7 +15,10 @@ function DashboardSidebar() {
     return (
         <aside className="dashboard-sidebar">
             <nav className="sidebar-nav">
-                <h2>Dashboard</h2>
+                <div className="sidebar-heading">
+                    <p className="sidebar-kicker">Admin Space</p>
+                    <h2>Dashboard</h2>
+                </div>
                 <ul>
                     {menuItems.map(item => (
                         <li key={item.path}>
