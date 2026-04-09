@@ -93,8 +93,11 @@ def client_create(request):
         if hasattr(user, 'client_profile'):
             return Response({'error': 'This user already has a client profile'}, status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist:
-        # Create new user if doesn't exist (username is optional now)
-        user = User.objects.create_user(email=email, password='temp123')
+        # Create new user if doesn't exist
+        try:
+            user = User.objects.create_user(email=email, password='temp123')
+        except Exception as e:
+            return Response({'error': f'Failed to create user: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
     
     # Create client linked to user
     try:
@@ -108,4 +111,4 @@ def client_create(request):
         serializer = ClientSerializer(client)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     except Exception as e:
-        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': f'Failed to create client: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
