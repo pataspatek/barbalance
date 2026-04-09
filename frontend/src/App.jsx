@@ -14,6 +14,8 @@ import Gallery from './pages/Gallery/Gallery';
 import Login from './pages/Login/Login';
 import Logout from './pages/Logout/Logout';
 import Dashboard from './pages/Dashboard/Dashboard';
+import ClientManagement from './pages/ClientManagement/ClientManagement';
+import BlogManagement from './pages/BlogManagement/BlogManagement';
 
 function App() {
 
@@ -35,6 +37,8 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Logout />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/dashboard/clients" element={<ClientManagement />} />
+                    <Route path="/dashboard/blog" element={<BlogManagement />} />
                 </Routes>
 
                 <Footer />
