@@ -102,7 +102,7 @@ def client_create(request):
             user=user,
             first_name=request.data.get('first_name', ''),
             last_name=request.data.get('last_name', ''),
-            age=request.data.get('age'),
+            age=request.data.get('age') or None,  # Convert empty string to None
             phone=request.data.get('phone', '')
         )
         serializer = ClientSerializer(client)
