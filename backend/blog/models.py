@@ -16,9 +16,20 @@ class Recipe(models.Model):
     class Meta:
         ordering = ['-created_at']
 
+    def _build_unique_slug(self):
+        base_slug = slugify(self.title) or 'recipe'
+        candidate = base_slug
+        suffix = 2
+
+        while Recipe.objects.filter(slug=candidate).exclude(pk=self.pk).exists():
+            candidate = f'{base_slug}-{suffix}'
+            suffix += 1
+
+        return candidate
+
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = self._build_unique_slug()
         super().save(*args, **kwargs)
 
     def __str__(self):

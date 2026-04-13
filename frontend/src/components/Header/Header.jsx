@@ -5,6 +5,7 @@ import './Header.scss';
 
 function Header() {
     const { user } = useContext(AuthContext);
+    const displayName = user?.username || user?.email?.split('@')[0] || '';
 
     return (
         <header className="header">
@@ -23,6 +24,17 @@ function Header() {
                     <Link to="/approach">Náš přístup</Link>
                     <Link to="/contact">Kontakt</Link>
                 </nav>
+
+                <div className="user-section">
+                    {user ? (
+                        <>
+                            <span className="user-name">@{displayName}</span>
+                            <Link to="/logout" className="logout-link">Odhlásit se</Link>
+                        </>
+                    ) : (
+                        <Link to="/login" className="login-link">Přihlásit se</Link>
+                    )}
+                </div>
             </div>
         </header>
     );

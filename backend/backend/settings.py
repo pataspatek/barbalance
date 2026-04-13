@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+import cloudinary
 import dj_database_url
 
 load_dotenv()
@@ -183,6 +184,14 @@ if os.environ.get("CLOUDINARY_CLOUD_NAME"):
         'API_KEY': os.environ.get("CLOUDINARY_API_KEY"),
         'API_SECRET': os.environ.get("CLOUDINARY_API_SECRET"),
     }
+
+    # Configure Cloudinary SDK for direct uploader API calls.
+    cloudinary.config(
+        cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
+        api_key=os.environ.get("CLOUDINARY_API_KEY"),
+        api_secret=os.environ.get("CLOUDINARY_API_SECRET"),
+        secure=True,
+    )
     
     MEDIA_URL = '/media/'
 

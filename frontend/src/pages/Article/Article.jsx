@@ -2,6 +2,18 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './Article.scss';
 
+function buildCloudinaryVariant(url, width) {
+    if (!url || !url.includes('/upload/')) {
+        return url;
+    }
+    return url.replace('/upload/', `/upload/f_auto,q_auto,w_${width},c_limit,dpr_auto/`);
+}
+
+function buildResponsiveImageSources(url) {
+    const widths = [480, 720, 960, 1280, 1600];
+    return widths.map((width) => `${buildCloudinaryVariant(url, width)} ${width}w`).join(', ');
+}
+
 function Article() {
     const { slug } = useParams();
     const [article, setArticle] = useState(null);
@@ -26,7 +38,6 @@ function Article() {
             }
             const data = await response.json();
             setArticle(data);
-            console.log(data)
         } catch (err) {
             console.error('Error fetching article:', err);
             setError(err.message);
@@ -62,9 +73,13 @@ function Article() {
                 {article.image_url && (
                     <div className="recipe-image-container">
                         <img 
-                            src={article.image_url}
+                            src={buildCloudinaryVariant(article.image_url, 960)}
+                            srcSet={buildResponsiveImageSources(article.image_url)}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 920px"
                             alt={article.title}
                             className="recipe-image"
+                            loading="eager"
+                            decoding="async"
                         />
                     </div>
                 )}
@@ -87,6 +102,7 @@ function Article() {
 
                 {article.ingredients && (
                     <div className="recipe-section">
+                        <h2>Suroviny</h2>
                         <div 
                             className="recipe-ingredients"
                             dangerouslySetInnerHTML={{ __html: article.ingredients }}
@@ -96,6 +112,7 @@ function Article() {
 
                 {article.content && (
                     <div className="recipe-section">
+                        <h2>Postup</h2>
                         <div 
                             className="recipe-instructions"
                             dangerouslySetInnerHTML={{ __html: article.content }}
