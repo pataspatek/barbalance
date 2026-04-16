@@ -1,31 +1,19 @@
 from django.db import models
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField  # type: ignore
-from django_ckeditor_5.fields import CKEditor5Field # type: ignore
 
 class Recipe(models.Model):
-    title: models.CharField = models.CharField(max_length=200)
+    title: models.CharField = models.CharField(max_length=200, unique=True)
     slug: models.SlugField = models.SlugField(unique=True, blank=True)
-    description: CKEditor5Field = CKEditor5Field('description', config_name='default')
+    description: models.TextField = models.TextField(blank=True, null=True)
     image: CloudinaryField = CloudinaryField('image', blank=True, null=True, folder='recipes/')
-    ingredients: CKEditor5Field = CKEditor5Field('ingredients', config_name='default')
-    content: CKEditor5Field = CKEditor5Field('content', config_name='extends')
+    ingredients: models.TextField = models.TextField(blank=True, null=True)
+    content: models.TextField = models.TextField(blank=True, null=True)
     created_at: models.DateTimeField = models.DateTimeField(auto_now_add=True)
     updated_at: models.DateTimeField = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ['-created_at']
-
     def _build_unique_slug(self):
-        base_slug = slugify(self.title) or 'recipe'
-        candidate = base_slug
-        suffix = 2
-
-        while Recipe.objects.filter(slug=candidate).exclude(pk=self.pk).exists():
-            candidate = f'{base_slug}-{suffix}'
-            suffix += 1
-
-        return candidate
+        return slugify(self.title) or 'recipe'
 
     def save(self, *args, **kwargs):
         if not self.slug:

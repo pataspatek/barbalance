@@ -131,7 +131,7 @@
 .recipe-ingredients {
     ul,
     ol {
-        list-style: none;
+        list-style: none !important;
         padding: 0;
         margin: 0;
         display: grid;
@@ -160,6 +160,13 @@
 
 .recipe-instructions {
     counter-reset: step;
+
+    ol,
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
 
     p,
     li {

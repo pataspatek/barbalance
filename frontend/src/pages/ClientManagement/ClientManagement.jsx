@@ -37,7 +37,13 @@ function ClientManagement() {
 
     const fetchClients = async () => {
         setLoading(true);
+
         const token = await getValidToken();
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/api/clients/`, {
                 headers: {
@@ -45,7 +51,11 @@ function ClientManagement() {
                     'Content-Type': 'application/json',
                 },
             });
-            if (!response.ok) throw new Error('Failed to fetch clients');
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch clients');
+            }
+
             const data = await response.json();
             setClients(data);
             setError('');
@@ -63,19 +73,21 @@ function ClientManagement() {
         }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         const token = await getValidToken();
+        if (!token) {
+            navigate('/login');
+            return;
+        }
 
         try {
             const url = editingId 
                 ? `${import.meta.env.VITE_API_URL}/api/clients/${editingId}/update/`
                 : `${import.meta.env.VITE_API_URL}/api/clients/create/`;
             
-            const method = editingId ? 'PATCH' : 'POST';
-
             const response = await fetch(url, {
-                method,
+                method: editingId ? 'PATCH' : 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
@@ -111,21 +123,27 @@ function ClientManagement() {
         setShowForm(true);
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (clientId) => {
         if (!window.confirm('Are you sure you want to delete this client?')) return;
 
         const token = await getValidToken();
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+
         try {
-            const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/api/clients/${id}/delete/`,
-                {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                }
-            );
-            if (!response.ok) throw new Error('Failed to delete client');
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${clientId}/delete/`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete client');
+            }
+            
             await fetchClients();
             setError('');
         } catch (err) {
@@ -153,7 +171,15 @@ function ClientManagement() {
                         <h1>Client Management</h1>
                         <button 
                             className="btn btn-primary"
-                            onClick={() => setShowForm(!showForm)}
+                            onClick={() => {
+                                if (showForm) {
+                                    handleCancel();
+                                } else {
+                                    setFormData({ email: '', first_name: '', last_name: '', age: '', phone: '' });
+                                    setEditingId(null);
+                                    setShowForm(true);
+                                }
+                            }}
                         >
                             {showForm ? 'Cancel' : 'Add New Client'}
                         </button>

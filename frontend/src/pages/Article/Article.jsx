@@ -38,6 +38,7 @@ function Article() {
             }
             const data = await response.json();
             setArticle(data);
+            console.log('Fetched article:', data.image);
         } catch (err) {
             console.error('Error fetching article:', err);
             setError(err.message);
@@ -103,20 +104,22 @@ function Article() {
                 {article.ingredients && (
                     <div className="recipe-section">
                         <h2>Suroviny</h2>
-                        <div 
-                            className="recipe-ingredients"
-                            dangerouslySetInnerHTML={{ __html: article.ingredients }}
-                        />
+                        <ul className="recipe-ingredients">
+                            {article.ingredients.split('\n').filter(ingredient => ingredient.trim()).map((ingredient, index) => (
+                                <li key={index}>{ingredient.trim()}</li>
+                            ))}
+                        </ul>
                     </div>
                 )}
 
                 {article.content && (
                     <div className="recipe-section">
                         <h2>Postup</h2>
-                        <div 
-                            className="recipe-instructions"
-                            dangerouslySetInnerHTML={{ __html: article.content }}
-                        />
+                        <ol className="recipe-instructions">
+                            {article.content.split('\n').filter(step => step.trim()).map((step, index) => (
+                                <li key={index}>{step.trim()}</li>
+                            ))}
+                        </ol>
                     </div>
                 )}
             </article>
