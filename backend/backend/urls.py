@@ -10,7 +10,7 @@ from rest_framework_simplejwt.views import TokenVerifyView, TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/blog/', include('blog.urls')),
+    path('api/recipes/', include('recipes.urls')),
     path('api/auth/', include('users.urls')),
     path('api/clients/', include('clients.urls')),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),

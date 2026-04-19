@@ -25,7 +25,7 @@ function Blog() {
     const fetchArticles = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/blog/posts/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/posts/`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

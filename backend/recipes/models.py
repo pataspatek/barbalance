@@ -12,7 +12,7 @@ class Recipe(models.Model):
     created_at: models.DateTimeField = models.DateTimeField(auto_now_add=True)
     updated_at: models.DateTimeField = models.DateTimeField(auto_now=True)
 
-    def _build_unique_slug(self):
+    def _build_unique_slug(self) -> str:
         return slugify(self.title) or 'recipe'
 
     def save(self, *args, **kwargs):

@@ -14,7 +14,6 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-import cloudinary # type: ignore
 import dj_database_url
 
 load_dotenv()
@@ -54,7 +53,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'django_ckeditor_5',
-    'blog',
+    'recipes',
     'users',
     'clients',
 ]

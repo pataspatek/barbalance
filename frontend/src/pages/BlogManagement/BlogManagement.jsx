@@ -44,7 +44,7 @@ function BlogManagement() {
         }
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/blog/admin/posts/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/admin/posts/`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -83,8 +83,8 @@ function BlogManagement() {
 
         try {
             const url = editingId
-                ? `${import.meta.env.VITE_API_URL}/api/blog/admin/posts/${editingId}/update/`
-                : `${import.meta.env.VITE_API_URL}/api/blog/admin/posts/create/`;
+                ? `${import.meta.env.VITE_API_URL}/api/recipes/admin/posts/${editingId}/update/`
+                : `${import.meta.env.VITE_API_URL}/api/recipes/admin/posts/create/`;
 
             const form = new FormData();
             form.append('title', formData.title);
@@ -148,7 +148,7 @@ function BlogManagement() {
         }
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/blog/admin/posts/${recipeId}/delete/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/admin/posts/${recipeId}/delete/`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${token}`,
