@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_ckeditor_5',
     'recipes',
+    'blog',
     'users',
     'clients',
 ]
