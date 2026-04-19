@@ -174,6 +174,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MEDIA_URL = '/media/'
+
 # Cloudinary storage settings
 if os.environ.get("CLOUDINARY_CLOUD_NAME"):
     DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
@@ -185,19 +187,8 @@ if os.environ.get("CLOUDINARY_CLOUD_NAME"):
         'API_SECRET': os.environ.get("CLOUDINARY_API_SECRET"),
     }
 
-    # Configure Cloudinary SDK for direct uploader API calls.
-    cloudinary.config(
-        cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
-        api_key=os.environ.get("CLOUDINARY_API_KEY"),
-        api_secret=os.environ.get("CLOUDINARY_API_SECRET"),
-        secure=True,
-    )
-    
-    MEDIA_URL = '/media/'
-
 # Local media storage (development)
 else:
-    MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
 
 # CKEditor 5 Configuration

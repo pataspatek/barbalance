@@ -88,10 +88,15 @@ def admin_post_delete(request, pk):
     if recipe.image:
         try:
             import cloudinary.uploader # type: ignore
-            cloudinary.uploader.destroy(recipe.image)
+            # Get the public_id for the image
+            public_id = getattr(recipe.image, 'public_id', None)
+            if not public_id and isinstance(recipe.image, str):
+                public_id = recipe.image.strip()
+            if public_id:
+                cloudinary.uploader.destroy(public_id)
         except Exception:
             pass
-    
+
     recipe.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 

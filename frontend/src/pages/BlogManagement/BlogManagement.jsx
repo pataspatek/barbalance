@@ -86,13 +86,22 @@ function BlogManagement() {
                 ? `${import.meta.env.VITE_API_URL}/api/blog/admin/posts/${editingId}/update/`
                 : `${import.meta.env.VITE_API_URL}/api/blog/admin/posts/create/`;
 
+            const form = new FormData();
+            form.append('title', formData.title);
+            form.append('description', formData.description);
+            form.append('ingredients', formData.ingredients);
+            form.append('content', formData.content);
+            if (formData.imageFile) {
+                form.append('image_upload', formData.imageFile); // match serializer field name
+            }
+
             const response = await fetch(url, {
                 method: editingId ? 'PATCH' : 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
+                    // Do NOT set Content-Type, browser will set it
                 },
-                body: JSON.stringify(formData),
+                body: form,
             });
 
             const data = await response.json();

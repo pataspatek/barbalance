@@ -38,7 +38,7 @@ function Article() {
             }
             const data = await response.json();
             setArticle(data);
-            console.log('Fetched article:', data.image);
+            console.log('Fetched article:', data);
         } catch (err) {
             console.error('Error fetching article:', err);
             setError(err.message);
