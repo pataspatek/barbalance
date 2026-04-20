@@ -5,11 +5,11 @@ from .views import (
 )
 
 urlpatterns = [
-    # Public endpoints
+    # Public endpoints - for general users
     path('articles/', article_list, name='article_list'),
     path('articles/<slug:slug>/', article_detail, name='article_detail'),
     
-    # Admin endpoints
+    # Admin endpoints - for superusers
     path('admin/articles/', admin_article_list, name='admin_article_list'),
     path('admin/articles/<int:pk>/', admin_article_detail, name='admin_article_detail'),
     path('admin/articles/create/', admin_article_create, name='admin_article_create'),

@@ -8,17 +8,17 @@ import About from './pages/About/About';
 import Services from './pages/Services/Services';
 import Approach from './pages/Approach/Approach';
 import Contact from './pages/Contact/Contact';
-import Blog from './pages/Recipes/Recipes';
-import Article from './pages/Recipe/Recipe';
+import Blog from './pages/Blog/Blog';
+import Article from './pages/Article/Article';
 import Gallery from './pages/Gallery/Gallery';
 import Login from './pages/Login/Login';
 import Logout from './pages/Logout/Logout';
 import Dashboard from './pages/Dashboard/Dashboard';
 import ClientManagement from './pages/ClientManagement/ClientManagement';
 import BlogManagement from './pages/BlogManagement/BlogManagement';
-import RecipesManagement from './pages/RecipesManagement/RecipesManagement';
 import Recipes from './pages/Recipes/Recipes';
 import Recipe from './pages/Recipe/Recipe';
+import RecipesManagement from './pages/RecipesManagement/RecipesManagement';
 
 function App() {
 
@@ -35,6 +35,8 @@ function App() {
                     <Route path="/approach" element={<Approach />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/gallery" element={<Gallery />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/:slug" element={<Article />} />
                     <Route path="/recipes" element={<Recipes />} />
                     <Route path="/recipes/:slug" element={<Recipe />} />
                     <Route path="/login" element={<Login />} />
