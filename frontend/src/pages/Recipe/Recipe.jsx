@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import './Article.scss';
+import './Recipe.scss';
 
 function buildCloudinaryVariant(url, width) {
     if (!url || !url.includes('/upload/')) {
@@ -13,8 +13,8 @@ function buildResponsiveImageSources(url) {
     const widths = [480, 720, 960, 1280, 1600];
     return widths.map((width) => `${buildCloudinaryVariant(url, width)} ${width}w`).join(', ');
 }
-
-function Article() {
+    
+function Recipe() {
     const { slug } = useParams();
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -53,21 +53,21 @@ function Article() {
 
     if (error) {
         return (
-            <section className="article-error">
+            <section className="recipe-error">
                 <p>Chyba: {error}</p>
-                <Link to="/blog" className="cta-button">Zpět na blog</Link>
+                <Link to="/recipes" className="cta-button">Zpět na recepty</Link>
             </section>
         );
     }
 
     if (!article) {
-        return <section className="article-loading">Článek nenalezen</section>;
+        return <section className="recipe-loading">Článek nenalezen</section>;
     }
 
     return (
-        <section className="article-container">
-            <Link to="/blog" className="article-back-link">
-                ← Zpět na blog
+        <section className="recipe-container">
+            <Link to="/recipes" className="recipe-back-link">
+                ← Zpět na recepty
             </Link>
             
             <article className="recipe-article">
@@ -127,4 +127,4 @@ function Article() {
     );
 }
 
-export default Article;
+export default Recipe;

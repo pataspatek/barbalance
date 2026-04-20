@@ -1,14 +1,14 @@
 @use '../../styles/variables' as *;
 @use 'sass:color';
 
-// ============ ARTICLE PAGE ============
-.article-container {
+// ============ RECIPE PAGE ============
+.recipe-container {
     padding: $spacing-xxl $spacing-xl;
     max-width: 920px;
     margin: 0 auto;
 }
 
-.article-back-link {
+.recipe-back-link {
     color: $primary-color;
     text-decoration: none;
     margin-bottom: $spacing-lg;
@@ -22,7 +22,7 @@
     }
 }
 
-.article-error {
+.recipe-error {
     padding: $spacing-xxl;
     text-align: center;
     max-width: 800px;
@@ -34,7 +34,7 @@
     }
 }
 
-.article-loading {
+.recipe-loading {
     padding: $spacing-xxl;
     text-align: center;
 }
@@ -209,7 +209,7 @@
 }
 
 @media (max-width: 768px) {
-    .article-container {
+    .recipe-container {
         padding: $spacing-lg;
     }
 

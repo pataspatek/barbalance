@@ -20,7 +20,7 @@ function Header() {
                     <Link to="/">Domů</Link>
                     <Link to="/about">O nás</Link>
                     <Link to="/services">Služby</Link>
-                    <Link to="/blog">Blog</Link>
+                    <Link to="/recipes">Recepty</Link>
                     <Link to="/approach">Náš přístup</Link>
                     <Link to="/contact">Kontakt</Link>
                 </nav>

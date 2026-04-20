@@ -31,6 +31,12 @@
                     color: $primary-color;
                     letter-spacing: -0.03em;
                 }
+
+                button {
+                    padding: 0.75rem 1.5rem;
+                    font-weight: 700;
+                    font-size: 0.95rem;
+                }
             }
 
             .alert {
@@ -52,21 +58,15 @@
                 }
             }
 
-            .blog-grid-management {
-                display: grid;
-                grid-template-columns: 1.1fr 0.9fr;
-                gap: $spacing-xl;
-
-                .recipe-form-card,
-                .recipes-list-card {
-                    background:
-                        linear-gradient(180deg, rgba($background-light, 0.94), rgba($background-light, 0.84)),
-                        rgba($background-light, 0.9);
-                    border: 1px solid rgba($primary-color, 0.08);
-                    border-radius: $border-radius;
-                    padding: $spacing-xl;
-                    box-shadow: 0 18px 40px rgba($primary-color, 0.08);
-                }
+            .form-container {
+                background:
+                    linear-gradient(180deg, rgba($background-light, 0.94), rgba($background-light, 0.84)),
+                    rgba($background-light, 0.9);
+                border: 1px solid rgba($primary-color, 0.08);
+                border-radius: $border-radius;
+                padding: $spacing-xl;
+                box-shadow: 0 18px 40px rgba($primary-color, 0.08);
+                margin-bottom: $spacing-xl;
 
                 h2 {
                     color: $primary-color;
@@ -74,83 +74,55 @@
                     margin-bottom: $spacing-lg;
                 }
 
-                .recipe-form {
+                .article-form {
                     display: flex;
                     flex-direction: column;
-                    gap: $spacing-sm;
+                    gap: $spacing-md;
 
-                    label {
-                        font-weight: 600;
-                        color: $text-dark;
-                    }
+                    .form-group {
+                        display: flex;
+                        flex-direction: column;
+                        gap: $spacing-sm;
 
-                    input,
-                    textarea {
-                        width: 100%;
-                        border: 1px solid rgba($primary-color, 0.2);
-                        border-radius: 10px;
-                        padding: 0.8rem 0.9rem;
-                        font-size: 0.95rem;
-                        background: rgba(255, 255, 255, 0.85);
-
-                        &:focus {
-                            outline: none;
-                            border-color: rgba($primary-color, 0.5);
-                            box-shadow: 0 0 0 3px rgba($primary-color, 0.08);
-                        }
-                    }
-
-                    small {
-                        color: $text-muted;
-                        margin-bottom: $spacing-md;
-                    }
-
-                    .image-inputs {
-                        display: grid;
-                        grid-template-columns: 1fr;
-                        gap: $spacing-md;
-                        margin-top: $spacing-sm;
-                    }
-
-                    .current-image {
-                        margin-top: $spacing-md;
-
-                        p {
-                            margin-bottom: $spacing-sm;
-                            color: $text-muted;
+                        label {
+                            font-weight: 600;
+                            color: $text-dark;
+                            font-size: 0.95rem;
                         }
 
-                        img {
+                        input,
+                        textarea {
                             width: 100%;
-                            max-width: 220px;
+                            border: 1px solid rgba($primary-color, 0.2);
                             border-radius: 10px;
-                            border: 1px solid rgba($primary-color, 0.12);
+                            padding: 0.8rem 0.9rem;
+                            font-size: 0.95rem;
+                            background: rgba(255, 255, 255, 0.85);
+                            font-family: inherit;
+
+                            &:focus {
+                                outline: none;
+                                border-color: rgba($primary-color, 0.5);
+                                box-shadow: 0 0 0 3px rgba($primary-color, 0.08);
+                            }
+                        }
+
+                        textarea {
+                            resize: vertical;
+                            min-height: 120px;
                         }
                     }
 
                     .form-actions {
-                        margin-top: $spacing-lg;
                         display: flex;
                         gap: $spacing-sm;
+                        margin-top: $spacing-lg;
 
                         button {
-                            border: none;
-                            border-radius: 10px;
-                            padding: 0.75rem 1.1rem;
+                            flex: 1;
+                            padding: 0.75rem 1.2rem;
                             font-weight: 700;
-                            cursor: pointer;
-                            transition: transform $transition-base, box-shadow $transition-base;
-
-                            &:hover {
-                                transform: translateY(-1px);
-                                box-shadow: 0 8px 14px rgba(0, 0, 0, 0.08);
-                            }
-
-                            &:disabled {
-                                opacity: 0.6;
-                                cursor: not-allowed;
-                                transform: none;
-                            }
+                            font-size: 0.95rem;
 
                             &.secondary {
                                 background: transparent;
@@ -158,62 +130,102 @@
                                 color: $primary-color;
                             }
                         }
-
-                        button:not(.secondary) {
-                            background: $primary-color;
-                            color: white;
-                        }
                     }
                 }
+            }
 
-                .recipe-list {
+            .articles-section {
+                background:
+                    linear-gradient(180deg, rgba($background-light, 0.94), rgba($background-light, 0.84)),
+                    rgba($background-light, 0.9);
+                border: 1px solid rgba($primary-color, 0.08);
+                border-radius: $border-radius;
+                padding: $spacing-xl;
+                box-shadow: 0 18px 40px rgba($primary-color, 0.08);
+
+                h2 {
+                    color: $primary-color;
+                    font-size: 1.4rem;
+                    margin-bottom: $spacing-lg;
+                }
+
+                .loading {
+                    text-align: center;
+                    padding: $spacing-lg;
+                    color: $text-muted;
+                    font-size: 1rem;
+                }
+
+                .no-articles {
+                    text-align: center;
+                    padding: $spacing-lg;
+                    color: $text-muted;
+                    margin: 0;
+                }
+
+                .article-list {
                     display: flex;
                     flex-direction: column;
                     gap: $spacing-md;
 
-                    .recipe-row {
+                    .article-item {
                         display: flex;
                         justify-content: space-between;
+                        align-items: center;
                         gap: $spacing-md;
-                        padding: $spacing-md;
+                        padding: $spacing-md $spacing-lg;
                         border: 1px solid rgba($primary-color, 0.12);
                         border-radius: 12px;
                         background: rgba(255, 255, 255, 0.8);
+                        transition: box-shadow $transition-base;
 
-                        .recipe-row-main {
+                        &:hover {
+                            box-shadow: 0 4px 12px rgba($primary-color, 0.1);
+                        }
+
+                        .article-info {
+                            flex: 1;
+
                             h3 {
-                                margin-bottom: $spacing-sm;
+                                margin: 0 0 $spacing-sm 0;
                                 color: $text-dark;
+                                font-size: 1.1rem;
                             }
 
-                            p {
-                                color: $text-muted;
+                            .article-date {
                                 margin: 0;
-                                line-height: 1.35;
+                                color: $text-muted;
+                                font-size: 0.9rem;
                             }
                         }
 
-                        .recipe-row-actions {
+                        .article-actions {
                             display: flex;
                             gap: $spacing-sm;
-                            align-items: flex-start;
+                            align-items: center;
 
                             button {
-                                border-radius: 9px;
-                                border: none;
                                 padding: 0.55rem 0.9rem;
-                                cursor: pointer;
+                                border-radius: 8px;
+                                border: none;
                                 font-weight: 600;
-                            }
+                                cursor: pointer;
+                                font-size: 0.85rem;
+                                transition: all $transition-base;
 
-                            .secondary {
-                                background: rgba($primary-color, 0.1);
-                                color: $primary-color;
-                            }
+                                &:hover {
+                                    transform: translateY(-1px);
+                                }
 
-                            .danger {
-                                background: rgba(#b33a3a, 0.12);
-                                color: #8a2d2d;
+                                &.secondary {
+                                    background: rgba($primary-color, 0.1);
+                                    color: $primary-color;
+                                }
+
+                                &.danger {
+                                    background: rgba(#b33a3a, 0.12);
+                                    color: #8a2d2d;
+                                }
                             }
                         }
                     }
@@ -232,33 +244,27 @@
                 padding: $spacing-lg;
 
                 .dashboard-header {
+                    flex-direction: column;
+                    gap: $spacing-md;
+                    align-items: flex-start;
+
                     h1 {
                         font-size: 1.8rem;
                     }
+
+                    button {
+                        width: 100%;
+                    }
                 }
 
-                .blog-grid-management {
-                    grid-template-columns: 1fr;
-
-                    .recipe-form {
-                        .image-inputs {
-                            grid-template-columns: 1fr;
-                        }
-
-                        .form-actions {
+                .form-container,
+                .articles-section {
+                    .article-list {
+                        .article-item {
                             flex-direction: column;
+                            align-items: flex-start;
 
-                            button {
-                                width: 100%;
-                            }
-                        }
-                    }
-
-                    .recipe-list {
-                        .recipe-row {
-                            flex-direction: column;
-
-                            .recipe-row-actions {
+                            .article-actions {
                                 width: 100%;
 
                                 button {

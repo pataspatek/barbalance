@@ -3,16 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../utils/AuthContext';
 import DashboardSidebar from '../../components/DashboardSidebar/DashboardSidebar';
 import getValidToken from '../../utils/TokenValidation';
-import './BlogManagement.scss';
+import './RecipesManagement.scss';
 
-function BlogManagement() {
+function RecipesManagement() {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-    const [articles, setArticles] = useState([]);
+    const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         title: '',
+        description: '',
+        ingredients: '',
         content: '',
         imageFile: null,
     });
@@ -28,11 +30,11 @@ function BlogManagement() {
 
     useEffect(() => {
         if (user?.is_superuser) {
-            fetchArticles();
+            fetchRecipes();
         }
     }, [user]);
 
-    const fetchArticles = async () => {
+    const fetchRecipes = async () => {
         setLoading(true);
 
         const token = await getValidToken();
@@ -42,7 +44,7 @@ function BlogManagement() {
         }
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/blog/admin/articles/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/admin/posts/`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -50,14 +52,14 @@ function BlogManagement() {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to load articles.');
+                throw new Error('Failed to load recipes.');
             }
 
             const data = await response.json();
-            setArticles(data);
+            setRecipes(data);
             setError('');
         } catch (err) {
-            setError(err.message || 'Failed to load articles.');
+            setError(err.message || 'Failed to load recipes.');
         } finally {
             setLoading(false);
         }
@@ -81,20 +83,23 @@ function BlogManagement() {
 
         try {
             const url = editingId
-                ? `${import.meta.env.VITE_API_URL}/api/blog/admin/articles/${editingId}/update/`
-                : `${import.meta.env.VITE_API_URL}/api/blog/admin/articles/create/`;
+                ? `${import.meta.env.VITE_API_URL}/api/recipes/admin/posts/${editingId}/update/`
+                : `${import.meta.env.VITE_API_URL}/api/recipes/admin/posts/create/`;
 
             const form = new FormData();
             form.append('title', formData.title);
+            form.append('description', formData.description);
+            form.append('ingredients', formData.ingredients);
             form.append('content', formData.content);
             if (formData.imageFile) {
-                form.append('image_upload', formData.imageFile);
+                form.append('image_upload', formData.imageFile); // match serializer field name
             }
 
             const response = await fetch(url, {
                 method: editingId ? 'PATCH' : 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
+                    // Do NOT set Content-Type, browser will set it
                 },
                 body: form,
             });
@@ -102,35 +107,39 @@ function BlogManagement() {
             const data = await response.json();
             
             if (!response.ok) {
-                throw new Error(data.error || 'Failed to save article');
+                throw new Error(data.error || 'Failed to save recipe');
             }
 
             setFormData({
                 title: '',
+                description: '',
+                ingredients: '',
                 content: '',
                 imageFile: null,
             });
             setEditingId(null);
             setShowForm(false);
-            await fetchArticles();
+            await fetchRecipes();
             setError('');
         } catch (err) {
-            setError(err.message || 'Failed to save article');
+            setError(err.message || 'Failed to save recipe');
         }
     };
 
-    const handleEdit = (article) => {
+    const handleEdit = (recipe) => {
         setFormData({
-            title: article.title,
-            content: article.content,
+            title: recipe.title,
+            description: recipe.description,
+            ingredients: recipe.ingredients,
+            content: recipe.content,
             imageFile: null,
         });
-        setEditingId(article.id);
+        setEditingId(recipe.id);
         setShowForm(true);
     };
 
-    const handleDelete = async (articleId) => {
-        if (!window.confirm('Delete this article?')) return;
+    const handleDelete = async (recipeId) => {
+        if (!window.confirm('Delete this recipe?')) return;
 
         const token = await getValidToken();
         if (!token) {
@@ -139,7 +148,7 @@ function BlogManagement() {
         }
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/blog/admin/articles/${articleId}/delete/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/admin/posts/${recipeId}/delete/`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -147,10 +156,10 @@ function BlogManagement() {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to delete article');
+                throw new Error('Failed to delete recipe');
             }
 
-            await fetchArticles();
+            await fetchRecipes();
             setError('');
         } catch (error) {
             setError(error.message);
@@ -168,22 +177,22 @@ function BlogManagement() {
             <div className="dashboard-content">
                 <div className="dashboard-inner">
                     <div className="dashboard-header">
-                        <h1>Blog Management</h1>
+                        <h1>Recipes Management</h1>
                         <button 
-                            className="cta-button"
+                            className="btn btn-primary"
                             onClick={() => {
                                 if (showForm) {
-                                    setFormData({ title: '', content: '', imageFile: null });
+                                    setFormData({ title: '', description: '', ingredients: '', content: '', imageFile: null });
                                     setEditingId(null);
                                     setShowForm(false);
                                 } else {
-                                    setFormData({ title: '', content: '', imageFile: null });
+                                    setFormData({ title: '', description: '', ingredients: '', content: '', imageFile: null });
                                     setEditingId(null);
                                     setShowForm(true);
                                 }
                             }}
                         >
-                            {showForm ? 'Cancel' : 'Add New Article'}
+                            {showForm ? 'Cancel' : 'Add New Recipe'}
                         </button>
                     </div>
 
@@ -191,9 +200,9 @@ function BlogManagement() {
 
                     {showForm && (
                         <div className="form-container">
-                            <h2>{editingId ? 'Edit Article' : 'Add New Article'}</h2>
+                            <h2>{editingId ? 'Edit Recipe' : 'Add New Recipe'}</h2>
 
-                            <form className="article-form" onSubmit={handleSubmit}>
+                            <form className="recipe-form" onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="title">Title</label>
                                     <input
@@ -202,20 +211,46 @@ function BlogManagement() {
                                         name="title"
                                         value={formData.title}
                                         onChange={handleChange}
-                                        placeholder="Article Title"
+                                        placeholder="High-Protein Breakfast Bowl"
                                         required
                                     />
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="content">Content</label>
+                                    <label htmlFor="description">Description</label>
+                                    <textarea
+                                        id="description"
+                                        name="description"
+                                        value={formData.description}
+                                        onChange={handleChange}
+                                        placeholder="Short intro about this recipe"
+                                        rows={4}
+                                        required
+                                    />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="ingredients">Ingredients</label>
+                                    <textarea
+                                        id="ingredients"
+                                        name="ingredients"
+                                        value={formData.ingredients}
+                                        onChange={handleChange}
+                                        placeholder="List your ingredients here, one per line"
+                                        rows={7}
+                                        required
+                                    />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="content">Instructions</label>
                                     <textarea
                                         id="content"
                                         name="content"
                                         value={formData.content}
                                         onChange={handleChange}
-                                        placeholder="Article content"
-                                        rows={10}
+                                        placeholder="Step by step instructions"
+                                        rows={5}
                                         required
                                     />
                                 </div>
@@ -232,14 +267,14 @@ function BlogManagement() {
                                 </div>
 
                                 <div className="form-actions">
-                                    <button type="submit" className="cta-button">
-                                        {editingId ? 'Update Article' : 'Create Article'}
+                                    <button type="submit" className="btn btn-success">
+                                        {editingId ? 'Update Recipe' : 'Create Recipe'}
                                     </button>
                                     <button 
                                         type="button" 
-                                        className="cta-button secondary"
+                                        className="btn btn-secondary"
                                         onClick={() => {
-                                            setFormData({ title: '', content: '', imageFile: null });
+                                            setFormData({ title: '', description: '', ingredients: '', content: '', imageFile: null });
                                             setEditingId(null);
                                             setShowForm(false);
                                         }}
@@ -251,33 +286,31 @@ function BlogManagement() {
                         </div>
                     )}
 
-                    <div className="articles-section">
-                        <h2>All Articles ({articles.length})</h2>
+                    <div className="recipes-section">
+                        <h2>All Recipes ({recipes.length})</h2>
 
                         {loading ? (
-                            <div className="loading">Loading articles...</div>
-                        ) : articles.length === 0 ? (
-                            <p className="no-articles">No articles yet.</p>
+                            <div className="loading">Loading recipes...</div>
+                        ) : recipes.length === 0 ? (
+                            <p className="no-recipes">No recipes yet.</p>
                         ) : (
-                            <div className="article-list">
-                                {articles.map((article) => (
-                                    <article key={article.id} className="article-item">
-                                        <div className="article-info">
-                                            <h3>{article.title}</h3>
-                                            <p className="article-date">
-                                                {new Date(article.created_at).toLocaleDateString()}
-                                            </p>
+                            <div className="recipe-list">
+                                {recipes.map((recipe) => (
+                                    <article key={recipe.id} className="recipe-item">
+                                        <div className="recipe-info">
+                                            <h3>{recipe.title}</h3>
+                                            <p>{recipe.description || 'No description'}</p>
                                         </div>
-                                        <div className="article-actions">
+                                        <div className="recipe-actions">
                                             <button 
-                                                className="cta-button secondary"
-                                                onClick={() => handleEdit(article)}
+                                                className="btn btn-small btn-edit"
+                                                onClick={() => handleEdit(recipe)}
                                             >
                                                 Edit
                                             </button>
                                             <button
-                                                className="cta-button danger"
-                                                onClick={() => handleDelete(article.id)}
+                                                className="btn btn-small btn-delete"
+                                                onClick={() => handleDelete(recipe.id)}
                                             >
                                                 Delete
                                             </button>
@@ -293,4 +326,4 @@ function BlogManagement() {
     );
 }
 
-export default BlogManagement;
+export default RecipesManagement;

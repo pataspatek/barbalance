@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Blog.scss';
+import './Recipes.scss';
 
-function Blog() {
+function Recipes() {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -53,27 +53,27 @@ function Blog() {
     }
 
     return (
-        <section className="blog">
-            <h1>Blog</h1>
-            <p>Čtěte naše nejnovější články o zdraví, výžívě a fitness</p>
+        <section className="recipes">
+            <h1>Recepty</h1>
+            <p>Čtěte naše nejnovější recepty o zdraví, výžívě a fitness</p>
             
             {articles.length === 0 ? (
-                <p className="blog-empty">Zatím žádné články</p>
+                <p className="recipes-empty">Zatím žádné recepty</p>
             ) : (
-                <div className="blog-grid">
+                <div className="recipes-grid">
                     {articles.map((article) => (
                         <Link 
-                            to={`/blog/${article.slug}`} 
+                            to={`/recipes/${article.slug}`} 
                             key={article.slug}
-                            className="blog-card-link"
+                            className="recipes-card-link"
                         >
-                            <div className="blog-card">
+                            <div className="recipes-card">
                                 {article.image && (
-                                    <div className="blog-card-image">
+                                    <div className="recipes-card-image">
                                         <img src={article.image_url} alt={article.title} />
                                     </div>
                                 )}
-                                <div className="blog-card-content">
+                                <div className="recipes-card-content">
                                     <h3>{article.title}</h3>
                                     <p>
                                         {truncateText(stripHtml(article.description))}
@@ -91,4 +91,4 @@ function Blog() {
     );
 }
 
-export default Blog;
+export default Recipes;

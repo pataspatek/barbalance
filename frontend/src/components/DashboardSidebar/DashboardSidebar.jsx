@@ -8,6 +8,7 @@ function DashboardSidebar() {
     const menuItems = [
         { label: 'Clients', path: '/dashboard/clients' },
         { label: 'Blog', path: '/dashboard/blog' },
+        { label: 'Recipes', path: '/dashboard/recipes' },
     ];
 
     const isActive = (path) => location.pathname === path;
