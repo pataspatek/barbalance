@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import './Recipes.scss';
 
 function Recipes() {
-    const [articles, setArticles] = useState([]);
+    const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetchArticles();
+        fetchRecipes();
     }, []);
 
     const stripHtml = (html) => {
@@ -22,7 +22,7 @@ function Recipes() {
         return text.substring(0, length) + '...';
     };
 
-    const fetchArticles = async () => {
+    const fetchRecipes = async () => {
         try {
             setLoading(true);
             const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/posts/`, {
@@ -32,12 +32,12 @@ function Recipes() {
                 },
             });
             if (!response.ok) {
-                throw new Error('Failed to fetch articles');
+                throw new Error('Failed to fetch recipes');
             }
             const data = await response.json();
-            setArticles(data);
+            setRecipes(data);
         } catch (err) {
-            console.error('Error fetching articles:', err);
+            console.error('Error fetching recipes:', err);
             setError(err.message);
         } finally {
             setLoading(false);
@@ -45,11 +45,11 @@ function Recipes() {
     };
 
     if (loading) {
-        return <section className="blog article-loading">Načítání článků...</section>;
+        return <section className="recipes article-loading">Načítání receptů...</section>;
     }
 
     if (error) {
-        return <section className="blog article-error"><p>Chyba: {error}</p></section>;
+        return <section className="recipes article-error"><p>Chyba: {error}</p></section>;
     }
 
     return (
@@ -57,29 +57,29 @@ function Recipes() {
             <h1>Recepty</h1>
             <p>Čtěte naše nejnovější recepty o zdraví, výžívě a fitness</p>
             
-            {articles.length === 0 ? (
+            {recipes.length === 0 ? (
                 <p className="recipes-empty">Zatím žádné recepty</p>
             ) : (
                 <div className="recipes-grid">
-                    {articles.map((article) => (
+                    {recipes.map((recipe) => (
                         <Link 
-                            to={`/recipes/${article.slug}`} 
-                            key={article.slug}
+                            to={`/recipes/${recipe.slug}`} 
+                            key={recipe.slug}
                             className="recipes-card-link"
                         >
                             <div className="recipes-card">
-                                {article.image && (
+                                {recipe.image && (
                                     <div className="recipes-card-image">
-                                        <img src={article.image_url} alt={article.title} />
+                                        <img src={recipe.image_url} alt={recipe.title} />
                                     </div>
                                 )}
                                 <div className="recipes-card-content">
-                                    <h3>{article.title}</h3>
+                                    <h3>{recipe.title}</h3>
                                     <p>
-                                        {truncateText(stripHtml(article.description))}
+                                        {truncateText(stripHtml(recipe.description))}
                                     </p>
                                     <small>
-                                        {new Date(article.created_at).toLocaleDateString('cs-CZ')}
+                                        {new Date(recipe.created_at).toLocaleDateString('cs-CZ')}
                                     </small>
                                 </div>
                             </div>

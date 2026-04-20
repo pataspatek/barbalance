@@ -35,16 +35,29 @@ function App() {
                     <Route path="/approach" element={<Approach />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/gallery" element={<Gallery />} />
-                    <Route path="/blog" element={<Blog />} />
-                    <Route path="/blog/:slug" element={<Article />} />
-                    <Route path="/recipes" element={<Recipes />} />
-                    <Route path="/recipes/:slug" element={<Recipe />} />
+
+                    {/* Blog routes */}
+                    <Route path="blog">
+                        <Route index element={<Blog />} />
+                        <Route path=":slug" element={<Article />} />
+                    </Route>
+
+                    {/* Recipes routes */}
+                    <Route path="recipes">
+                        <Route index element={<Recipes />} />
+                        <Route path=":slug" element={<Recipe />} />
+                    </Route>
+
                     <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Logout />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/dashboard/clients" element={<ClientManagement />} />
-                    <Route path="/dashboard/blog" element={<BlogManagement />} />
-                    <Route path="/dashboard/recipes" element={<RecipesManagement />} />
+
+                    {/* Dashboard routes */}
+                    <Route path="/dashboard/">
+                        <Route index element={<Dashboard />} />
+                        <Route path="clients" element={<ClientManagement />} />
+                        <Route path="blog" element={<BlogManagement />} />
+                        <Route path="recipes" element={<RecipesManagement />} />
+                    </Route>
                 </Routes>
 
                 <Footer />
