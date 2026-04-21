@@ -11,16 +11,6 @@ function Recipes() {
         fetchRecipes();
     }, []);
 
-    const stripHtml = (html) => {
-        const tmp = document.createElement('DIV');
-        tmp.innerHTML = html;
-        return tmp.textContent || tmp.innerText || '';
-    };
-
-    const truncateText = (text, length = 150) => {
-        if (text.length <= length) return text;
-        return text.substring(0, length) + '...';
-    };
 
     const fetchRecipes = async () => {
         try {
@@ -76,7 +66,7 @@ function Recipes() {
                                 <div className="recipes-card-content">
                                     <h3>{recipe.title}</h3>
                                     <p>
-                                        {truncateText(stripHtml(recipe.description))}
+                                        {recipe.description.substring(0, 150) + '...'}
                                     </p>
                                     <small>
                                         {new Date(recipe.created_at).toLocaleDateString('cs-CZ')}

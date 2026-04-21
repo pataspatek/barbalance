@@ -5,7 +5,7 @@ import './Header.scss';
 
 function Header() {
     const { user } = useContext(AuthContext);
-    const displayName = user?.username || user?.email?.split('@')[0] || '';
+    const displayName = user?.username;
 
     return (
         <header className="header">
