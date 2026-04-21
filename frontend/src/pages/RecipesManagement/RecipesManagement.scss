@@ -1,4 +1,5 @@
 @use '../../styles/variables' as *;
+@use 'sass:color';
 
 .dashboard-layout {
     display: flex;
@@ -52,21 +53,15 @@
                 }
             }
 
-            .blog-grid-management {
-                display: grid;
-                grid-template-columns: 1.1fr 0.9fr;
-                gap: $spacing-xl;
-
-                .recipe-form-card,
-                .recipes-list-card {
-                    background:
-                        linear-gradient(180deg, rgba($background-light, 0.94), rgba($background-light, 0.84)),
-                        rgba($background-light, 0.9);
-                    border: 1px solid rgba($primary-color, 0.08);
-                    border-radius: $border-radius;
-                    padding: $spacing-xl;
-                    box-shadow: 0 18px 40px rgba($primary-color, 0.08);
-                }
+            .form-container {
+                background:
+                    linear-gradient(180deg, rgba($background-light, 0.94), rgba($background-light, 0.84)),
+                    rgba($background-light, 0.9);
+                border: 1px solid rgba($primary-color, 0.08);
+                border-radius: $border-radius;
+                padding: $spacing-xl;
+                box-shadow: 0 18px 40px rgba($primary-color, 0.08);
+                margin-bottom: $spacing-xl;
 
                 h2 {
                     color: $primary-color;
@@ -74,20 +69,26 @@
                     margin-bottom: $spacing-lg;
                 }
 
-                .recipe-form {
+                form {
                     display: flex;
                     flex-direction: column;
-                    gap: $spacing-sm;
+                    gap: $spacing-md;
+                }
+
+                .form-group {
+                    display: flex;
+                    flex-direction: column;
 
                     label {
                         font-weight: 600;
+                        margin-bottom: 0.5rem;
                         color: $text-dark;
                     }
 
                     input,
                     textarea {
                         width: 100%;
-                        border: 1px solid rgba($primary-color, 0.2);
+                        border: 1px solid rgba($primary-color, 0.12);
                         border-radius: 10px;
                         padding: 0.8rem 0.9rem;
                         font-size: 0.95rem;
@@ -100,70 +101,39 @@
                         }
                     }
 
-                    small {
-                        color: $text-muted;
-                        margin-bottom: $spacing-md;
+                    textarea {
+                        resize: vertical;
+                        min-height: 120px;
                     }
+                }
 
-                    .image-inputs {
-                        display: grid;
-                        grid-template-columns: 1fr;
-                        gap: $spacing-md;
-                        margin-top: $spacing-sm;
-                    }
+                .form-actions {
+                    display: flex;
+                    gap: $spacing-md;
+                    margin-top: $spacing-md;
+                }
+            }
 
-                    .current-image {
-                        margin-top: $spacing-md;
+            .recipes-section {
+                background:
+                    linear-gradient(180deg, rgba($background-light, 0.94), rgba($background-light, 0.84)),
+                    rgba($background-light, 0.9);
+                border: 1px solid rgba($primary-color, 0.08);
+                border-radius: $border-radius;
+                padding: $spacing-xl;
+                box-shadow: 0 18px 40px rgba($primary-color, 0.08);
 
-                        p {
-                            margin-bottom: $spacing-sm;
-                            color: $text-muted;
-                        }
+                h2 {
+                    color: $primary-color;
+                    font-size: 1.4rem;
+                    margin-bottom: $spacing-lg;
+                }
 
-                        img {
-                            width: 100%;
-                            max-width: 220px;
-                            border-radius: 10px;
-                            border: 1px solid rgba($primary-color, 0.12);
-                        }
-                    }
-
-                    .form-actions {
-                        margin-top: $spacing-lg;
-                        display: flex;
-                        gap: $spacing-sm;
-
-                        button {
-                            border: none;
-                            border-radius: 10px;
-                            padding: 0.75rem 1.1rem;
-                            font-weight: 700;
-                            cursor: pointer;
-                            transition: transform $transition-base, box-shadow $transition-base;
-
-                            &:hover {
-                                transform: translateY(-1px);
-                                box-shadow: 0 8px 14px rgba(0, 0, 0, 0.08);
-                            }
-
-                            &:disabled {
-                                opacity: 0.6;
-                                cursor: not-allowed;
-                                transform: none;
-                            }
-
-                            &.secondary {
-                                background: transparent;
-                                border: 1px solid rgba($primary-color, 0.28);
-                                color: $primary-color;
-                            }
-                        }
-
-                        button:not(.secondary) {
-                            background: $primary-color;
-                            color: white;
-                        }
-                    }
+                .no-recipes {
+                    text-align: center;
+                    padding: $spacing-lg;
+                    color: $text-muted;
+                    margin: 0;
                 }
 
                 .recipe-list {
@@ -171,55 +141,147 @@
                     flex-direction: column;
                     gap: $spacing-md;
 
-                    .recipe-row {
+                    .recipe-item {
                         display: flex;
                         justify-content: space-between;
+                        align-items: center;
                         gap: $spacing-md;
-                        padding: $spacing-md;
+                        padding: $spacing-md $spacing-lg;
                         border: 1px solid rgba($primary-color, 0.12);
                         border-radius: 12px;
                         background: rgba(255, 255, 255, 0.8);
+                        transition: box-shadow $transition-base;
 
-                        .recipe-row-main {
+                        &:hover {
+                            box-shadow: 0 4px 12px rgba($primary-color, 0.1);
+                        }
+
+                        .recipe-info {
+                            flex: 1;
+
                             h3 {
-                                margin-bottom: $spacing-sm;
+                                margin: 0 0 $spacing-sm 0;
                                 color: $text-dark;
+                                font-size: 1.1rem;
                             }
 
                             p {
-                                color: $text-muted;
                                 margin: 0;
-                                line-height: 1.35;
+                                color: $text-muted;
+                                font-size: 0.9rem;
                             }
                         }
 
-                        .recipe-row-actions {
+                        .recipe-actions {
                             display: flex;
                             gap: $spacing-sm;
-                            align-items: flex-start;
+                            align-items: center;
 
                             button {
-                                border-radius: 9px;
+                                padding: 0.4rem 0.8rem;
+                                border-radius: 4px;
                                 border: none;
-                                padding: 0.55rem 0.9rem;
-                                cursor: pointer;
                                 font-weight: 600;
-                            }
+                                cursor: pointer;
+                                font-size: 0.85rem;
+                                transition: all $transition-base;
 
-                            .secondary {
-                                background: rgba($primary-color, 0.1);
-                                color: $primary-color;
-                            }
+                                &:hover {
+                                    transform: translateY(-2px);
+                                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                                }
 
-                            .danger {
-                                background: rgba(#b33a3a, 0.12);
-                                color: #8a2d2d;
+                                &.btn-edit {
+                                    background: rgba($primary-color, 0.12);
+                                    color: $primary-color;
+                                }
+
+                                &.btn-delete {
+                                    background: rgba(#b33a3a, 0.12);
+                                    color: #8a2d2d;
+                                }
                             }
                         }
                     }
                 }
             }
         }
+    }
+}
+
+// ============ BUTTONS ============
+.btn {
+    padding: 0.65rem 1.25rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    &.btn-primary {
+        background: linear-gradient(135deg, $primary-color, $secondary-color);
+        color: white;
+
+        &:hover {
+            background: linear-gradient(135deg, color.scale($primary-color, $lightness: -8%), color.scale($secondary-color, $lightness: -8%));
+        }
+    }
+
+    &.btn-success {
+        background-color: $primary-color;
+        color: white;
+
+        &:hover {
+            background-color: color.scale($primary-color, $lightness: -10%);
+        }
+    }
+
+    &.btn-secondary {
+        background-color: transparent;
+        color: $primary-color;
+        border: 1px solid rgba($primary-color, 0.18);
+
+        &:hover {
+            background-color: rgba($primary-color, 0.06);
+        }
+    }
+
+    &.btn-edit {
+        background-color: rgba($primary-color, 0.12);
+        color: $primary-color;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+
+        &:hover {
+            background-color: rgba($primary-color, 0.18);
+        }
+    }
+
+    &.btn-delete {
+        background-color: rgba(#b33a3a, 0.1);
+        color: #8a2d2d;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+
+        &:hover {
+            background-color: rgba(#b33a3a, 0.16);
+        }
+    }
+
+    &.btn-small {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
     }
 }
 
@@ -237,28 +299,13 @@
                     }
                 }
 
-                .blog-grid-management {
-                    grid-template-columns: 1fr;
-
-                    .recipe-form {
-                        .image-inputs {
-                            grid-template-columns: 1fr;
-                        }
-
-                        .form-actions {
-                            flex-direction: column;
-
-                            button {
-                                width: 100%;
-                            }
-                        }
-                    }
-
+                .recipes-section {
                     .recipe-list {
-                        .recipe-row {
+                        .recipe-item {
                             flex-direction: column;
+                            align-items: flex-start;
 
-                            .recipe-row-actions {
+                            .recipe-actions {
                                 width: 100%;
 
                                 button {

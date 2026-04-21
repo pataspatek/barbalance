@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../utils/AuthContext';
 import DashboardSidebar from '../../components/DashboardSidebar/DashboardSidebar';
 import getValidToken from '../../utils/TokenValidation';
+import Loader from '../../components/Loader/Loader';
 import './RecipesManagement.scss';
 
 function RecipesManagement() {
@@ -290,7 +291,7 @@ function RecipesManagement() {
                         <h2>All Recipes ({recipes.length})</h2>
 
                         {loading ? (
-                            <div className="loading">Loading recipes...</div>
+                            <Loader />
                         ) : recipes.length === 0 ? (
                             <p className="no-recipes">No recipes yet.</p>
                         ) : (
@@ -299,7 +300,7 @@ function RecipesManagement() {
                                     <article key={recipe.id} className="recipe-item">
                                         <div className="recipe-info">
                                             <h3>{recipe.title}</h3>
-                                            <p>{recipe.description || 'No description'}</p>
+                                            <p>{recipe.description?.substr(0, 150) + '...'}</p>
                                         </div>
                                         <div className="recipe-actions">
                                             <button 

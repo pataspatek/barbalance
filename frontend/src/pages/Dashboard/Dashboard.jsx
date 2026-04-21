@@ -16,8 +16,6 @@ function Dashboard() {
             navigate('/dashboard/clients');
         }
     }, [user, navigate]);
-
-    return null;
 }
 
 export default Dashboard;

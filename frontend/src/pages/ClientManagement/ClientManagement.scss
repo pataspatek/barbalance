@@ -120,6 +120,14 @@
             }
 
             .clients-table {
+                background:
+                    linear-gradient(180deg, rgba($background-light, 0.94), rgba($background-light, 0.84)),
+                    rgba($background-light, 0.9);
+                border: 1px solid rgba($primary-color, 0.08);
+                border-radius: $border-radius;
+                padding: $spacing-xl;
+                box-shadow: 0 18px 40px rgba($primary-color, 0.08);
+
                 h2 {
                     margin-bottom: $spacing-lg;
                     color: $primary-color;
@@ -129,20 +137,18 @@
                     text-align: center;
                     color: $text-muted;
                     padding: $spacing-lg;
-                    background-color: rgba($background-light, 0.86);
+                    background-color: rgba($background-light, 0.6);
                     border-radius: $border-radius;
                     border: 1px solid rgba($primary-color, 0.08);
-                    box-shadow: 0 14px 30px rgba($primary-color, 0.06);
                 }
 
                 table {
                     width: 100%;
                     border-collapse: collapse;
-                    background-color: rgba($background-light, 0.92);
-                    border: 1px solid rgba($primary-color, 0.08);
+                    background-color: transparent;
+                    border: none;
                     border-radius: $border-radius;
                     overflow: hidden;
-                    box-shadow: 0 18px 40px rgba($primary-color, 0.08);
 
                     thead {
                         background: linear-gradient(180deg, rgba($primary-color, 0.98), rgba($secondary-color, 0.96));

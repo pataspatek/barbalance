@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../utils/AuthContext';
 import DashboardSidebar from '../../components/DashboardSidebar/DashboardSidebar';
 import getValidToken from '../../utils/TokenValidation';
+import Loader from '../../components/Loader/Loader';
 import './BlogManagement.scss';
 
 function BlogManagement() {
@@ -170,7 +171,7 @@ function BlogManagement() {
                     <div className="dashboard-header">
                         <h1>Blog Management</h1>
                         <button 
-                            className="cta-button"
+                            className="btn btn-primary"
                             onClick={() => {
                                 if (showForm) {
                                     setFormData({ title: '', content: '', imageFile: null });
@@ -232,12 +233,12 @@ function BlogManagement() {
                                 </div>
 
                                 <div className="form-actions">
-                                    <button type="submit" className="cta-button">
+                                    <button type="submit" className="btn btn-success">
                                         {editingId ? 'Update Article' : 'Create Article'}
                                     </button>
                                     <button 
                                         type="button" 
-                                        className="cta-button secondary"
+                                        className="btn btn-secondary"
                                         onClick={() => {
                                             setFormData({ title: '', content: '', imageFile: null });
                                             setEditingId(null);
@@ -255,7 +256,7 @@ function BlogManagement() {
                         <h2>All Articles ({articles.length})</h2>
 
                         {loading ? (
-                            <div className="loading">Loading articles...</div>
+                            <Loader />
                         ) : articles.length === 0 ? (
                             <p className="no-articles">No articles yet.</p>
                         ) : (
@@ -270,13 +271,13 @@ function BlogManagement() {
                                         </div>
                                         <div className="article-actions">
                                             <button 
-                                                className="cta-button secondary"
+                                                className="btn btn-small btn-edit"
                                                 onClick={() => handleEdit(article)}
                                             >
                                                 Edit
                                             </button>
                                             <button
-                                                className="cta-button danger"
+                                                className="btn btn-small btn-delete"
                                                 onClick={() => handleDelete(article.id)}
                                             >
                                                 Delete

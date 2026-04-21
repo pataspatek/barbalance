@@ -4,6 +4,7 @@ import { AuthContext } from '../../utils/AuthContext';
 import getValidToken from '../../utils/TokenValidation';
 import DashboardSidebar from '../../components/DashboardSidebar/DashboardSidebar';
 import './ClientManagement.scss';
+import Loader from '../../components/Loader/Loader';
 
 function ClientManagement() {
     const { user } = useContext(AuthContext);
@@ -266,15 +267,14 @@ function ClientManagement() {
                         </div>
                     )}
 
-                    {loading ? (
-                        <div className="loading">Loading clients...</div>
-                    ) : (
-                        <div className="clients-table">
-                            <h2>All Clients ({clients.length})</h2>
-                            {clients.length === 0 ? (
-                                <p className="no-clients">No clients found.</p>
-                            ) : (
-                                <table>
+                    <div className="clients-table">
+                        <h2>All Clients ({clients.length})</h2>
+                        {loading ? (
+                            <Loader />
+                        ) : clients.length === 0 ? (
+                            <p className="no-clients">No clients found.</p>
+                        ) : (
+                            <table>
                                     <thead>
                                         <tr>
                                             <th>Username</th>
@@ -317,7 +317,6 @@ function ClientManagement() {
                                 </table>
                             )}
                         </div>
-                    )}
                 </div>
             </div>
         </div>

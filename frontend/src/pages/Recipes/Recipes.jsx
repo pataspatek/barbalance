@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../../components/Loader/Loader';
 import './Recipes.scss';
 
 function Recipes() {
@@ -35,7 +36,7 @@ function Recipes() {
     };
 
     if (loading) {
-        return <section className="recipes article-loading">Načítání receptů...</section>;
+        return <Loader />;
     }
 
     if (error) {
