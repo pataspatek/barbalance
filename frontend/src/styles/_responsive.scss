@@ -22,21 +22,6 @@
 
 // Tablet (768px and below)
 @media (max-width: $breakpoint-md) {
-    .header-container {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-    }
-
-    .nav {
-        gap: 1.5rem;
-        font-size: 0.9rem;
-    }
-
-    .logo {
-        font-size: 1.5rem;
-    }
-
     .hero {
         padding: 3rem 1rem;
         gap: 1rem;
@@ -109,16 +94,6 @@
 
 // Mobile (480px and below)
 @media (max-width: $breakpoint-sm) {
-    .logo {
-        font-size: 1.3rem;
-    }
-
-    .nav {
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
     .hero {
         padding: 2rem 0.5rem;
         min-height: 380px;
