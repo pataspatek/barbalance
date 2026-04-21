@@ -31,8 +31,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 
         image_url = getattr(image_value, 'url', None)
         if image_url:
-            # Zajistit HTTPS místo HTTP
-            return image_url.replace('http://', 'https://')
+            return image_url
 
         public_id = getattr(image_value, 'public_id', None)
         if not public_id and isinstance(image_value, str):

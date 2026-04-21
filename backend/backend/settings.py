@@ -185,6 +185,10 @@ if os.environ.get("CLOUDINARY_CLOUD_NAME"):
         'API_KEY': os.environ.get("CLOUDINARY_API_KEY"),
         'API_SECRET': os.environ.get("CLOUDINARY_API_SECRET"),
     }
+    
+    # Ensure HTTPS URLs from Cloudinary
+    import cloudinary # type: ignore
+    cloudinary.config(secure=True)
 
 # Local media storage (development)
 else:
