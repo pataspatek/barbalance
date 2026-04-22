@@ -25,7 +25,6 @@ function About() {
                         <h3>Udržitelné</h3>
                         <p>Budování zvyků, které zůstanou dlouhodobě</p>
                     </div>
-                    <p>testing</p>
                 </div>
             </div>
         </section>
