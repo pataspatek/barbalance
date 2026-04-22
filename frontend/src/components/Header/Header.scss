@@ -1,123 +1,165 @@
 @use '../../styles/variables' as *;
-@use 'sass:color';
 
-// ============ HEADER ============
+// ============ HEADER STYLES ============
 .header {
-    background: $background-light;
-    border-bottom: 1px solid rgba($primary-color, 0.1);
-    padding: 1.5rem 0;
+    background-color: $background-light;
+    border-bottom: 2px solid $accent-color;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    position: relative;
 }
 
 .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     max-width: $max-width;
     margin: 0 auto;
-    padding: 0 $spacing-xl;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: $spacing-lg $spacing-xl;
     gap: $spacing-xl;
 }
 
+// ============ LOGO SECTION ============
 .logo-section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+    flex-shrink: 0;
 }
 
 .logo-link {
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    transition: transform $transition-base;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
 }
 
 .logo {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: $primary-color;
+    margin: 0;
     letter-spacing: -0.5px;
 }
 
 .tagline {
     font-size: 0.75rem;
-    font-weight: 500;
     color: $text-muted;
-    letter-spacing: 2px;
+    margin: 0;
+    letter-spacing: 1px;
     text-transform: uppercase;
+    font-weight: 500;
 }
 
 // ============ NAVIGATION ============
 .nav {
     display: flex;
-    gap: $spacing-xxl;
+    gap: $spacing-xl;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
 
-    a:not(.login-link):not(.logout-link) {
+    .nav-links {
+        display: flex;
+        gap: $spacing-xl;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        white-space: nowrap;
+    }
+
+    .nav-link {
+        position: relative;
         color: $text-dark;
         text-decoration: none;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 0.95rem;
         transition: color $transition-base;
-        position: relative;
+        padding: $spacing-sm 0;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: $primary-color;
+            transition: width $transition-base;
+        }
+
+        &:hover::after,
+        &:focus-visible::after {
+            width: 100%;
+        }
 
         &:hover {
             color: $primary-color;
         }
 
-        &:hover::after {
-            width: 100%;
+        &:focus-visible {
+            outline: 2px solid $primary-color;
+            outline-offset: 4px;
+            border-radius: 4px;
         }
+    }
+
+    .user-section {
+        display: flex;
+        flex-direction: row;
+        gap: $spacing-lg;
+        align-items: center;
+        padding: 0;
+        border: none;
+        margin: 0;
+        flex-shrink: 0;
     }
 }
 
 // ============ USER SECTION ============
-.user-section-desktop {
+.user-section {
     display: flex;
     align-items: center;
     gap: $spacing-lg;
-}
+    flex-shrink: 0;
 
-.user-section-mobile {
-    display: none;
-}
-
-.user-name {
-    font-weight: 500;
-    color: $text-dark;
-    font-size: 0.95rem;
-}
-
-.login-link,
-.logout-link {
-    color: $primary-color;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid $primary-color;
-    border-radius: 4px;
-    transition: all $transition-base;
-
-    &:hover {
-        background: $primary-color;
-        color: white;
+    .user-name {
+        color: $primary-color;
+        font-weight: 600;
+        font-size: 0.95rem;
     }
-}
 
-// ============ BACKDROP ============
-.backdrop {
-    display: none;
-    position: fixed;
-    top: calc(1.5rem + 2rem + 0.2rem + 0.75rem + 1.5rem);
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 98;
-    transition: opacity $transition-base;
+    .logout-link,
+    .login-link {
+        background-color: $primary-color;
+        color: $background-light;
+        text-decoration: none;
+        padding: $spacing-md $spacing-lg;
+        border-radius: $border-radius;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all $transition-base;
+        display: inline-block;
 
-    &.active {
-        display: block;
+        &:hover {
+            background-color: $secondary-color;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(49, 98, 56, 0.3);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+
+        &:focus-visible {
+            outline: 2px solid $accent-color;
+            outline-offset: 2px;
+        }
     }
 }
 
@@ -125,160 +167,177 @@
 .burger-menu {
     display: none;
     flex-direction: column;
-    gap: 0.4rem;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
-    z-index: 101;
+    padding: $spacing-md;
+    gap: 6px;
+    flex-shrink: 0;
+    z-index: 110;
 
     span {
-        width: 1.8rem;
+        display: block;
+        width: 25px;
         height: 3px;
-        background: $primary-color;
+        background-color: $primary-color;
         border-radius: 2px;
         transition: all $transition-base;
-        display: block;
     }
 
     &.active {
-        span {
-            &:nth-child(1) {
-                transform: rotate(45deg) translate(8px, 8px);
-            }
-
-            &:nth-child(2) {
-                opacity: 0;
-            }
-
-            &:nth-child(3) {
-                transform: rotate(-45deg) translate(8px, -8px);
-            }
+        span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
         }
+
+        span:nth-child(2) {
+            opacity: 0;
+        }
+
+        span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+    }
+
+    &:focus-visible {
+        outline: 2px solid $primary-color;
+        outline-offset: 4px;
+        border-radius: 4px;
     }
 }
 
-// ============ RESPONSIVE ============
-@media (max-width: 920px) {
+// ============ BACKDROP / FOG EFFECT ============
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color $transition-base;
+    pointer-events: none;
+    z-index: 99;
+
+    &.active {
+        background-color: rgba(0, 0, 0, 0.5);
+        pointer-events: auto;
+        backdrop-filter: blur(2px);
+    }
+}
+
+// ============ RESPONSIVE DESIGN ============
+@media (max-width: $breakpoint-md) {
+    .header-container {
+        padding: $spacing-md $spacing-lg;
+        gap: $spacing-md;
+    }
+
+    .burger-menu {
+        display: flex;
+    }
+
     .nav {
-        position: fixed;
-        top: calc(1.5rem + 2rem + 0.2rem + 0.75rem + 1.5rem);
+        position: absolute;
+        top: 100%;
         left: 0;
         right: 0;
-        display: none;
         flex-direction: column;
-        background: $background-light;
-        border-bottom: 1px solid rgba($primary-color, 0.1);
-        padding: $spacing-lg;
-        gap: $spacing-md;
-        transition: all $transition-slow;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        z-index: 99;
+        gap: 0;
+        background-color: $background-light;
+        padding: $spacing-xl 0;
+        max-height: calc(100vh - 100%);
+        overflow-y: auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateX(100%);
+        transition: transform $transition-base;
+        z-index: 105;
+        justify-content: flex-start;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
 
         &.active {
-            display: flex;
+            transform: translateX(0);
         }
 
-        a:not(.login-link):not(.logout-link) {
-            font-size: 1rem;
-            padding: $spacing-md 0;
-            border-bottom: 1px solid rgba($primary-color, 0.05);
-            transition: padding-left $transition-base;
+        .nav-links {
+            flex-direction: column;
+            gap: 0;
+            width: 100%;
+            flex: none;
+            white-space: normal;
+        }
+
+        .nav-link {
+            padding: $spacing-lg $spacing-xl;
+            width: 100%;
+            display: block;
+            border-bottom: 1px solid $background-warm;
 
             &::after {
                 display: none;
             }
 
             &:hover {
-                padding-left: $spacing-md;
+                background-color: $background-warm;
+            }
+        }
+
+        .user-section {
+            display: flex;
+            flex-direction: column;
+            gap: $spacing-md;
+            padding: $spacing-lg $spacing-xl;
+            margin-top: $spacing-md;
+            width: 100%;
+
+            .user-name {
+                display: block;
+                padding-bottom: $spacing-md;
+                border-bottom: 1px solid $background-warm;
+                text-align: center;
+            }
+
+            .logout-link,
+            .login-link {
+                width: 100%;
+                text-align: center;
+                padding: $spacing-md;
+                display: block;
             }
         }
     }
 
-    .user-section {
-        display: flex;
-        flex-direction: column;
-        gap: $spacing-md;
+
+
+    .logo {
+        font-size: 1.5rem;
     }
 
-    .user-section-desktop {
-        display: none;
-    }
-
-    .user-section-mobile {
-        display: flex;
-        flex-direction: column;
-        gap: $spacing-md;
-    }
-
-    .user-name {
-        font-weight: 500;
-        color: $text-dark;
-        font-size: 0.95rem;
-        padding: $spacing-md 0;
-    }
-
-    .login-link,
-    .logout-link {
-        width: 100%;
-        text-align: center;
-        color: $primary-color;
-        border: 1px solid $primary-color;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 0.9rem;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        transition: all $transition-base;
-
-        &:hover {
-            background: $primary-color;
-            color: white !important;
-            border-color: $primary-color;
-        }
-    }
-
-    .burger-menu {
-        display: flex;
+    .tagline {
+        font-size: 0.65rem;
     }
 }
 
-@media (max-width: 480px) {
-    .header {
-        padding: 0.75rem 0;
-    }
-
-    .backdrop {
-        top: calc(0.75rem + 1.2rem + 0.2rem + 0.6rem + 0.75rem);
-    }
-
-    .nav {
-        top: calc(0.75rem + 1.2rem + 0.2rem + 0.6rem + 0.75rem);
-    }
-
+@media (max-width: $breakpoint-sm) {
     .header-container {
-        padding: 0 $spacing-md;
-        gap: $spacing-sm;
+        padding: $spacing-md;
     }
 
     .logo-section {
-        flex-shrink: 0;
+        min-width: 0;
     }
 
     .logo {
-        font-size: 1.2rem;
+        font-size: 1.25rem;
     }
 
     .tagline {
         font-size: 0.6rem;
-        letter-spacing: 1px;
     }
 
     .burger-menu {
-        margin-left: auto;
-
         span {
-            width: 1.3rem;
+            width: 22px;
+            height: 2.5px;
         }
     }
 }
