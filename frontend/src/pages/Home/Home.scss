@@ -75,3 +75,79 @@
         animation: fadeInUp $transition-slow 0.2s backwards;
     }
 }
+
+.cta-button {
+    display: inline-block;
+    background-color: $primary-color;
+    color: $background-light;
+    text-decoration: none;
+    padding: $spacing-md $spacing-lg;
+    border-radius: $border-radius;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all $transition-base;
+
+    &:hover {
+        background-color: $secondary-color;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(49, 98, 56, 0.3);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+// ============ RESPONSIVE DESIGN ============
+@media (max-width: $breakpoint-md) {
+    .hero {
+        padding: 3rem $spacing-lg;
+        min-height: 400px;
+    }
+
+    .hero-image {
+        display: none;
+    }
+
+    .hero-content {
+        max-width: 100%;
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+    }
+
+    .cta-button {
+        font-size: 0.95rem;
+        padding: $spacing-md $spacing-lg;
+    }
+}
+
+@media (max-width: $breakpoint-sm) {
+    .hero {
+        padding: 2rem $spacing-md;
+        min-height: 300px;
+    }
+
+    .hero-content {
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+        }
+    }
+
+    .cta-button {
+        font-size: 0.9rem;
+    }
+}
