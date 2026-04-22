@@ -22,16 +22,19 @@ def client_list(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def client_detail(request, pk):
+def client_detail(request, username):
     """Get client profile - users can only see their own, superusers can see all"""
-    try:
-        client = Client.objects.get(pk=pk)
-    except Client.DoesNotExist:
-        return Response({'error': 'Client not found'}, status=status.HTTP_404_NOT_FOUND)
+    if not request.user.is_superuser:
+        serializer = ClientSerializer(request.user.client_profile)
+        return Response(serializer.data)
     
-    # Users can only see their own profile, superusers can see any
-    if not request.user.is_superuser and request.user != client.user:
-        return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+    try:
+        user = User.objects.get(username=username)
+        client = user.client_profile
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Client.DoesNotExist:
+        return Response({'error': 'Client profile not found'}, status=status.HTTP_404_NOT_FOUND)
     
     serializer = ClientSerializer(client)
     return Response(serializer.data)
@@ -39,15 +42,18 @@ def client_detail(request, pk):
 
 @api_view(['PUT', 'PATCH'])
 @permission_classes([IsAuthenticated])
-def client_update(request, pk):
+def client_update(request, username):
     """Update client - only superusers can update"""
     if not request.user.is_superuser:
         return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
     
     try:
-        client = Client.objects.get(pk=pk)
+        user = User.objects.get(username=username)
+        client = user.client_profile
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     except Client.DoesNotExist:
-        return Response({'error': 'Client not found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'error': 'Client profile not found'}, status=status.HTTP_404_NOT_FOUND)
     
     serializer = ClientSerializer(client, data=request.data, partial=True)
     if serializer.is_valid():
@@ -58,18 +64,17 @@ def client_update(request, pk):
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
-def client_delete(request, pk):
+def client_delete(request, username):
     """Delete client and associated user - only superusers can delete"""
     if not request.user.is_superuser:
         return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
     
     try:
-        client = Client.objects.get(pk=pk)
-    except Client.DoesNotExist:
-        return Response({'error': 'Client not found'}, status=status.HTTP_404_NOT_FOUND)
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     
     # Deleting the user will cascade delete the client
-    user = client.user
     user.delete()
     
     return Response(status=status.HTTP_204_NO_CONTENT)

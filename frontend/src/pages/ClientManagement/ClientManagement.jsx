@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../utils/AuthContext';
 import getValidToken from '../../utils/TokenValidation';
 import DashboardSidebar from '../../components/DashboardSidebar/DashboardSidebar';
@@ -310,6 +310,9 @@ function ClientManagement() {
                                                     >
                                                         Delete
                                                     </button>
+                                                    <Link to={`/client/${client.username}`} className="btn btn-small btn-view">
+                                                        View
+                                                    </Link>
                                                 </td>
                                             </tr>
                                         ))}

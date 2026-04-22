@@ -19,6 +19,8 @@ import BlogManagement from './pages/BlogManagement/BlogManagement';
 import Recipes from './pages/Recipes/Recipes';
 import Recipe from './pages/Recipe/Recipe';
 import RecipesManagement from './pages/RecipesManagement/RecipesManagement';
+import ClientDetail from './pages/ClientDetail/ClientDetail';
+
 
 function App() {
 
@@ -35,6 +37,8 @@ function App() {
                     <Route path="/approach" element={<Approach />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/gallery" element={<Gallery />} />
+
+                    <Route path="/client/:username" element={<ClientDetail />} />
 
                     {/* Blog routes */}
                     <Route path="blog">

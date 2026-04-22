@@ -1,0 +1,220 @@
+@use '../../styles/variables' as *;
+
+.client-detail {
+    min-height: 100vh;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, $background-warm 0%, $background-light 100%);
+
+    .client-detail-card {
+        max-width: 700px;
+        margin: 0 auto;
+        background: $background-light;
+        border-radius: $border-radius;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        transition: box-shadow $transition-base;
+
+        &:hover {
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+        }
+
+        // Header section
+        .client-header {
+            background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+            color: white;
+            padding: $spacing-xxl;
+            text-align: center;
+
+            .client-avatar {
+                width: 80px;
+                height: 80px;
+                margin: 0 auto $spacing-lg;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2rem;
+                font-weight: bold;
+                border: 3px solid rgba(255, 255, 255, 0.3);
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin: 0;
+                font-weight: 700;
+                line-height: 1.2;
+            }
+
+            .username {
+                font-size: 0.95rem;
+                opacity: 0.9;
+                margin-top: $spacing-lg;
+                padding-top: $spacing-lg;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+                font-weight: 400;
+                letter-spacing: 0.5px;
+            }
+        }
+
+        // Content sections
+        .client-info {
+            padding: $spacing-xxl;
+
+            .info-section {
+                margin-bottom: $spacing-xl;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .section-title {
+                    font-size: 0.85rem;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    color: $primary-color;
+                    font-weight: 700;
+                    margin-bottom: $spacing-lg;
+                    padding-bottom: $spacing-md;
+                    border-bottom: 2px solid $primary-color;
+                }
+
+                .info-row {
+                    display: flex;
+                    align-items: center;
+                    padding: $spacing-md 0;
+                    transition: transform $transition-fast, background $transition-fast;
+
+                    &:hover {
+                        transform: translateX(4px);
+                    }
+
+                    label {
+                        font-weight: 600;
+                        color: $text-dark;
+                        min-width: 130px;
+                        display: flex;
+                        align-items: center;
+                        font-size: 0.95rem;
+
+                        &::before {
+                            content: '';
+                            display: inline-block;
+                            width: 4px;
+                            height: 4px;
+                            background: $primary-color;
+                            border-radius: 50%;
+                            margin-right: $spacing-md;
+                        }
+                    }
+
+                    span {
+                        color: $text-dark;
+                        flex: 1;
+                        font-size: 1rem;
+                        word-break: break-word;
+
+                        &:empty::before {
+                            content: 'Neuvedeno';
+                            color: $text-muted;
+                            font-style: italic;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // State messages
+    .loading-state,
+    .error-state,
+    .empty-state {
+        max-width: 500px;
+        margin: 0 auto;
+        background: $background-light;
+        border-radius: $border-radius;
+        padding: $spacing-xxl;
+        text-align: center;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: $spacing-lg;
+            color: $primary-color;
+        }
+
+        p {
+            color: $text-muted;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+    }
+
+    .error-state {
+        background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+        border-left: 5px solid #d32f2f;
+
+        h1 {
+            color: #d32f2f;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-md) {
+    .client-detail {
+        padding: 2rem 1rem;
+
+        .client-detail-card {
+            .client-header {
+                padding: $spacing-xl;
+
+                h1 {
+                    font-size: 1.5rem;
+                }
+
+                .client-avatar {
+                    width: 70px;
+                    height: 70px;
+                    font-size: 1.5rem;
+                }
+
+                .username {
+                    font-size: 0.85rem;
+                    margin-top: $spacing-md;
+                    padding-top: $spacing-md;
+                }
+            }
+
+            .client-info {
+                padding: $spacing-lg;
+
+                .info-section {
+                    .section-title {
+                        font-size: 0.8rem;
+                    }
+
+                    .info-row {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        padding: $spacing-md 0;
+
+                        label {
+                            margin-bottom: $spacing-sm;
+                            min-width: auto;
+                        }
+                    }
+                }
+            }
+        }
+
+        .loading-state,
+        .error-state,
+        .empty-state {
+            padding: $spacing-lg;
+
+            h1 {
+                font-size: 1.3rem;
+            }
+        }
+    }
+}

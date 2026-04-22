@@ -37,7 +37,9 @@ function Header() {
                         <div className="user-section">
                             {user ? (
                                 <>
-                                    <span className="user-name">@{displayName}</span>
+                                    <Link to={`/client/${displayName}`} onClick={closeMenu}>
+                                        <span className="user-name">@{displayName}</span>
+                                    </Link>
                                     <Link to="/logout" className="logout-link">Odhlásit se</Link>
                                 </>
                             ) : (
