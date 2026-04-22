@@ -305,32 +305,4 @@
             }
         }
     }
-
-
-
-    .logo {
-        font-size: 1.5rem;
-    }
-
-    .tagline {
-        font-size: 0.65rem;
-    }
-}
-
-@media (max-width: $breakpoint-sm) {
-    .header-container {
-        padding: $spacing-md;
-    }
-
-    .logo-section {
-        min-width: 0;
-    }
-
-    .logo {
-        font-size: 1.25rem;
-    }
-
-    .tagline {
-        font-size: 0.6rem;
-    }
 }
